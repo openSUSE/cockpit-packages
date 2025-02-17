@@ -17,19 +17,15 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from 'react';
-import { Alert } from "@patternfly/react-core/dist/esm/components/Alert/index.js";
-import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
-import { Page, PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
-import { Button, SearchInput } from '@patternfly/react-core';
+import React, { useEffect } from 'react';
+import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
+import { Button } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
-import { cellWidth, TableText } from "@patternfly/react-table";
 import { install_dialog } from "cockpit-components-install-dialog.jsx";
 
 import cockpit from 'cockpit';
 import * as PK from "packagekit.js";
-import { WithDialogs } from "dialogs.jsx";
 
 const _ = cockpit.gettext;
 
@@ -42,13 +38,10 @@ export type InstallPackage = {
     selected: boolean,
 }
 
-export const Install = () => {
-    const [value, setValue] = React.useState('');
-    const [search, setSearch] = React.useState('');
+export const Install = ({ searchVal }: { searchVal: string }) => {
     const [packages, setPackages] = React.useState<Record<string, InstallPackage>>({});
 
-    const onSearch = (searchVal: string) => {
-        console.log(searchVal);
+    useEffect(() => {
         const search = searchVal.trim();
         if (search.length === 0) {
             setPackages({});
@@ -73,52 +66,35 @@ export const Install = () => {
             .catch(ex => {
                 console.log(ex);
             });
-    }
-
-    React.useEffect(() => {
-        // TODO: display search progress indicator
-        const timeout = setTimeout(() => onSearch(search), 500);
-        return () => {
-            return clearTimeout(timeout);
-        }
-    }, [search]);
+    }, [searchVal, setPackages]);
 
     return (
-        <WithDialogs>
-            <SearchInput
-                placeholder="Find by name"
-                value={value}
-                onChange={(_event, value) => { setValue(value); setSearch(value) }}
-                onSearch={(_event, value) => onSearch(value)}
-                onClear={() => setValue('')}
+        <PageSection variant={PageSectionVariants.light} className="install-pkg">
+            <ListingTable aria-label={_("Found packages")}
+                gridBreakPoint='grid-lg'
+                columns={[
+                    { title: _("Name") },
+                    { title: _("Version") },
+                    { title: _("Details") },
+                ]}
+                rows={Object.keys(packages).map(key => {
+                    const pkg = packages[key];
+                    return {
+                        columns: [
+                            { title: pkg.name },
+                            { title: pkg.version },
+                            { title: pkg.summary.split("\n")[0] },
+                            {
+                                title: <Button onClick={async () => {
+                                    await install_dialog(pkg.name)
+                                }}>
+                                    Install
+                                </Button>
+                            },
+                        ]
+                    }
+                })}
             />
-            <Page>
-                <ListingTable aria-label={_("Found packages")}
-                    gridBreakPoint='grid-lg'
-                    columns={[
-                        { title: _("Name") },
-                        { title: _("Version") },
-                        { title: _("Details") },
-                    ]}
-                    rows={Object.keys(packages).map(key => {
-                        const pkg = packages[key];
-                        return {
-                            columns: [
-                                { title: pkg.name },
-                                { title: pkg.version },
-                                { title: pkg.summary.split("\n")[0] },
-                                {
-                                    title: <Button onClick={async () => {
-                                        await install_dialog(pkg.name)
-                                    }}>
-                                        Install
-                                    </Button>
-                                },
-                            ]
-                        }
-                    })}
-                />
-            </Page>
-        </WithDialogs>
+        </PageSection>
     );
 };

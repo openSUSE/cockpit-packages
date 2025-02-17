@@ -3,3 +3,13 @@
 p {
     font-weight: bold;
 }
+
+.pkg-management-header {
+  --pf-v5-c-page__main-nav--PaddingBottom: var(--pf-v5-c-page__main-nav--PaddingTop);
+  padding-block-end: var(--pf-v5-c-page__main-nav--PaddingBottom);
+}
+
+.pkg-management-search {
+  width: 25rem;
+}
+

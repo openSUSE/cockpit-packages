@@ -17,19 +17,15 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect, useState } from 'react';
-import { Alert } from "@patternfly/react-core/dist/esm/components/Alert/index.js";
-import { Card, CardBody, CardTitle } from "@patternfly/react-core/dist/esm/components/Card/index.js";
-import { Page, PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
-import { Button, Modal, SearchInput } from '@patternfly/react-core';
+import React, { useEffect } from 'react';
+import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
+import { Button, Modal } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
-import { cellWidth, TableText } from "@patternfly/react-table";
-import { install_dialog } from "cockpit-components-install-dialog.jsx";
 
 import cockpit from 'cockpit';
 import * as PK from "packagekit.js";
-import { useDialogs, WithDialogs } from "dialogs.jsx";
+import { useDialogs } from "dialogs.jsx";
 
 import { show_modal_dialog } from "cockpit-components-dialog.jsx";
 
@@ -88,13 +84,12 @@ export type InstallPackage = {
     selected: boolean,
 }
 
-export const Remove = () => {
+export const Remove = ({ searchVal }: { searchVal: string }) => {
     const Dialogs = useDialogs();
-    const [value, setValue] = React.useState('');
     const [allPackages, setAllPackages] = React.useState<Record<string, InstallPackage>>({});
     const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPackage>>({});
 
-    const onSearch = (searchVal: string) => {
+    useEffect(() => {
         // TODO: only trigger search every 100 ms (or so) in order to make the
         //       input feel more responsive
         console.log(searchVal);
@@ -112,7 +107,7 @@ export const Remove = () => {
             }
         }
         setFilteredPackages(foundPackages);
-    }
+    }, [searchVal, setFilteredPackages]);
 
     const uninstallPkg = (pkg: string) => {
 
@@ -159,39 +154,30 @@ export const Remove = () => {
     }, []);
 
     return (
-        <>
-            <SearchInput
-                placeholder="Find by name"
-                value={value}
-                onChange={(_event, value) => { setValue(value); onSearch(value) }}
-                onSearch={(_event, value) => onSearch(value)}
-                onClear={() => setValue('')}
-            />
-            <Page>
-                <ListingTable aria-label={_("Installed packages")}
-                    gridBreakPoint='grid-lg'
-                    columns={[
-                        { title: _("Name") },
-                        { title: _("Version") },
-                        { title: _("Details") },
-                    ]}
-                    rows={Object.keys(filteredPackages).map(key => {
-                        const pkg = filteredPackages[key];
-                        return {
-                            columns: [
-                                { title: pkg.name },
-                                { title: pkg.version },
-                                { title: pkg.summary.split("\n")[0] },
-                                {
-                                    title: <Button onClick={() => /* uninstallPkg(key) */ /* removeDialog() */Dialogs.show(<MyDialog />)}>
-                                        Uninstall
-                                    </Button>
-                                },
-                            ]
-                        }
-                    })}
-                />
-            </Page>
-        </>
+        <PageSection variant={PageSectionVariants.light} className="uninstall-pkg">
+          <ListingTable aria-label={_("Installed packages")}
+              gridBreakPoint='grid-lg'
+              columns={[
+                  { title: _("Name") },
+                  { title: _("Version") },
+                  { title: _("Details") },
+              ]}
+              rows={Object.keys(filteredPackages).map(key => {
+                  const pkg = filteredPackages[key];
+                  return {
+                      columns: [
+                          { title: pkg.name },
+                          { title: pkg.version },
+                          { title: pkg.summary.split("\n")[0] },
+                          {
+                              title: <Button onClick={() => /* uninstallPkg(key) */ /* removeDialog() */Dialogs.show(<MyDialog />)}>
+                                  Uninstall
+                              </Button>
+                          },
+                      ]
+                  }
+              })}
+          />
+      </PageSection>
     );
 };
