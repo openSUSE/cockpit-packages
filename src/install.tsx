@@ -33,7 +33,7 @@ import { WithDialogs } from "dialogs.jsx";
 
 const _ = cockpit.gettext;
 
-export type InstallPacakge = {
+export type InstallPackage = {
     name: string,
     version: string,
     severity: typeof PK.Enum,
@@ -45,7 +45,7 @@ export type InstallPacakge = {
 export const Install = () => {
     const [value, setValue] = React.useState('');
     const [search, setSearch] = React.useState('');
-    const [packages, setPackages] = React.useState<Record<string, InstallPacakge>>({});
+    const [packages, setPackages] = React.useState<Record<string, InstallPackage>>({});
 
     const onSearch = (searchVal: string) => {
         console.log(searchVal);
@@ -56,7 +56,7 @@ export const Install = () => {
         };
 
         // TODO: set state that blocks searching while search is already on
-        const foundPackages: Record<string, InstallPacakge> = {};
+        const foundPackages: Record<string, InstallPackage> = {};
 
         PK.cancellableTransaction("SearchNames", [0, [search]], () => console.log("state change"), {
             Package: (info: typeof PK.Enum, packageId: string, summary: string) => {

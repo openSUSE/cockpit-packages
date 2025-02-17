@@ -79,7 +79,7 @@ const MyDialog = () => {
         </Modal>);
 }
 
-export type InstallPacakge = {
+export type InstallPackage = {
     name: string,
     version: string,
     severity: typeof PK.Enum,
@@ -91,8 +91,8 @@ export type InstallPacakge = {
 export const Remove = () => {
     const Dialogs = useDialogs();
     const [value, setValue] = React.useState('');
-    const [allPackages, setAllPackages] = React.useState<Record<string, InstallPacakge>>({});
-    const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPacakge>>({});
+    const [allPackages, setAllPackages] = React.useState<Record<string, InstallPackage>>({});
+    const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPackage>>({});
 
     const onSearch = (searchVal: string) => {
         // TODO: only trigger search every 100 ms (or so) in order to make the
@@ -105,7 +105,7 @@ export const Remove = () => {
         };
 
         // TODO: set state that blocks searching while search is already on
-        const foundPackages: Record<string, InstallPacakge> = {};
+        const foundPackages: Record<string, InstallPackage> = {};
         for (const key of Object.keys(allPackages)) {
             if (key.toLocaleLowerCase().includes(search)) {
                 foundPackages[key] = allPackages[key];
@@ -137,7 +137,7 @@ export const Remove = () => {
 
     React.useEffect(() => {
 
-        const foundPackages: Record<string, InstallPacakge> = {};
+        const foundPackages: Record<string, InstallPackage> = {};
 
         PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], () => console.log("state change"), {
             Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
