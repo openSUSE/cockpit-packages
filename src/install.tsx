@@ -51,16 +51,14 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
         // TODO: set state that blocks searching while search is already on
         const foundPackages: Record<string, InstallPackage> = {};
 
-        PK.cancellableTransaction("SearchNames", [0, [search]], () => console.log("state change"), {
+        PK.cancellableTransaction("SearchNames", [0, [search]], null/* () => console.log("state change") */, {
             Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
                 const fields = packageId.split(";");
                 foundPackages[packageId] = { name: fields[0], version: fields[1], severity: info, arch: fields[2], selected: false, summary };
                 // console.log(info); console.log(packageId); console.log(summary);
             },
         })
-            .then(transactionPath => {
-                console.log(transactionPath);
-                console.log("We are finished!!");
+            .then(() => {
                 setPackages(foundPackages);
             })
             .catch(ex => {
