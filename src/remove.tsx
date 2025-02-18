@@ -22,6 +22,7 @@ import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/es
 import { Alert, Button, Modal } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
+import { EmptyStatePanel } from "cockpit-components-empty-state";
 
 import cockpit from 'cockpit';
 import * as PK from "packagekit.js";
@@ -38,7 +39,7 @@ export type InstallPackage = {
     id: string,
 }
 
-const RemoveDialog = ({ pkg }: { pkg: InstallPackage }) => {
+const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstalled: () => void }) => {
     const Dialogs = useDialogs();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
@@ -51,6 +52,7 @@ const RemoveDialog = ({ pkg }: { pkg: InstallPackage }) => {
             },
         })
             .then(() => {
+                onUnInstalled();
                 Dialogs.close();
             })
             .catch(ex => {
@@ -103,10 +105,13 @@ const RemoveDialog = ({ pkg }: { pkg: InstallPackage }) => {
 
 export const Remove = ({ searchVal }: { searchVal: string }) => {
     const Dialogs = useDialogs();
+    const [loading, setLoading] = React.useState(false);
     const [allPackages, setAllPackages] = React.useState<Record<string, InstallPackage>>({});
     const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPackage>>({});
 
     useEffect(() => {
+        if (loading)
+            return;
         // TODO: only trigger search every 100 ms (or so) in order to make the
         //       input feel more responsive
         const search = searchVal.trim().toLocaleLowerCase();
@@ -123,9 +128,10 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
             }
         }
         setFilteredPackages(foundPackages);
-    }, [searchVal, setFilteredPackages]);
+    }, [searchVal, setFilteredPackages, loading]);
 
-    React.useEffect(() => {
+    const loadInstalledPkgs = () => {
+        setLoading(true);
         const foundPackages: Record<string, InstallPackage> = {};
 
         PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], null/* () => console.log("state change") */, {
@@ -140,9 +146,17 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
             })
             .catch(ex => {
                 console.log(ex);
-            });
+            })
+            .finally(() => setLoading(false));
+    }
 
+    React.useEffect(() => {
+        loadInstalledPkgs();
     }, []);
+
+    if (loading) {
+        return <EmptyStatePanel loading />;
+    }
 
     return (
         <PageSection variant={PageSectionVariants.light} className="uninstall-pkg">
@@ -161,7 +175,12 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
                             { title: pkg.version },
                             { title: pkg.summary.split("\n")[0] },
                             {
-                                title: <Button onClick={() => Dialogs.show(<RemoveDialog pkg={pkg} />)}>
+                                title: <Button onClick={() => Dialogs.show(
+                                    <RemoveDialog
+                                        pkg={pkg}
+                                        onUnInstalled={() => loadInstalledPkgs()}
+                                    />
+                                )}>
                                     Uninstall
                                 </Button>
                             },
