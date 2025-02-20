@@ -3,10 +3,10 @@
   <id>org.opensuse.cockpit-packages.metainfo.xml</id>
   <metadata_license>CC0-1.0</metadata_license>
   <name>Packages</name>
-  <summary>A cockpit module for (un)installing pacakges.</summary>
+  <summary>A cockpit module for (un)installing packages.</summary>
   <description>
     <p>
-      A cockpit module for (un)installing pacakges.
+      A cockpit module for (un)installing packages.
     </p>
   </description>
   <extends>org.cockpit_project.cockpit</extends>

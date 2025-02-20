@@ -1,6 +1,6 @@
 {
-  "name": "pacakges",
-  "description": "A cockpit module for (un)installing pacakges.",
+  "name": "packages",
+  "description": "A cockpit module for (un)installing packages.",
   "type": "module",
   "main": "index.js",
   "repository": "https://github.com/openSUSE/cockpit-packages",
