@@ -10,37 +10,38 @@ import { InstalledStore } from './state';
 
 const _ = cockpit.gettext;
 
-const ApplicationInner: React.FunctionComponent = () => {
-  const [method, setMethod] = React.useState<string>("uninstall");
-  const [searchVal, setSearchVal] = React.useState<string>("");
+const SearchBox = ({onChange}: {onChange: (val: string) => void}) => {
   const [searchBufferedVal, setSearchBufferedVal] = React.useState<string>("");
 
-  // Reset search term whenever method is changed
   useEffect(() => {
-    setSearchVal('');
-  }, [method, setSearchVal]);
-
-  useEffect(() => {
-      // TODO: display search progress indicator
-      const timeout = setTimeout(() => setSearchVal(searchBufferedVal), 500);
+      const timeout = setTimeout(() => onChange(searchBufferedVal), 500);
       return () => {
           return clearTimeout(timeout);
       }
-  });
+  }, [searchBufferedVal]);
+
+  return (
+    <SearchInput
+      className="pkg-management-search"
+      placeholder="Find by name"
+      value={searchBufferedVal}
+      onChange={(_event, value) => { setSearchBufferedVal(value)}}
+      onSearch={(_event, value) => { onChange(value)}}
+      onClear={() => {onChange(""); setSearchBufferedVal("")}}
+    />
+  );
+}
+
+const ApplicationInner: React.FunctionComponent = () => {
+  const [method, setMethod] = React.useState<string>("uninstall");
+  const [searchVal, setSearchVal] = React.useState<string>("");
 
   return (
     <WithDialogs>
       <Page>
           <PageSection variant={PageSectionVariants.light} type="nav" className="pkg-management-header">
               <Flex>
-                  <SearchInput
-                      className="pkg-management-search"
-                      placeholder="Find by name"
-                      value={searchVal}
-                      onChange={(_event, value) => { setSearchBufferedVal(value)}}
-                      onSearch={(_event, value) => { setSearchVal(value)}}
-                      onClear={() => setSearchVal('')}
-                  />
+                  <SearchBox onChange={setSearchVal} />
                   <FlexItem align={{ default: 'alignRight' }}>
                       {<ToggleGroup>
                           <ToggleGroupItem isSelected={method == "uninstall"}

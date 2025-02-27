@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 
 import * as PK from "packagekit.js";
 
@@ -47,6 +47,10 @@ export const InstalledStore: React.FC<{ children: React.ReactNode }> = props => 
             })
             .finally(() => setLoading(false));
     }
+
+    useEffect(() => {
+        refreshInstalled();
+    }, []);
 
     return <InstalledContext.Provider value={{ installed, refreshInstalled, loading }} {...props} />;
 };

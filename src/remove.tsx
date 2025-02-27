@@ -130,10 +130,6 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
         setFilteredPackages(foundPackages);
     }, [searchVal, setFilteredPackages, loading]);
 
-    React.useEffect(() => {
-        refreshInstalled();
-    }, []);
-
     if (loading) {
         return <EmptyStatePanel loading />;
     }
