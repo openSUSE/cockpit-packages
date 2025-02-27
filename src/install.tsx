@@ -26,20 +26,15 @@ import { install_dialog } from "cockpit-components-install-dialog.jsx";
 
 import cockpit from 'cockpit';
 import * as PK from "packagekit.js";
+import { InstallPackage, useInstalled } from './state';
 
 const _ = cockpit.gettext;
 
-export type InstallPackage = {
-    name: string,
-    version: string,
-    severity: typeof PK.Enum,
-    arch: string,
-    summary: string,
-    selected: boolean,
-}
+type ReInstallPkg = InstallPackage & { isInstalled: boolean };
 
 export const Install = ({ searchVal }: { searchVal: string }) => {
-    const [packages, setPackages] = React.useState<Record<string, InstallPackage>>({});
+    const { installed } = useInstalled();
+    const [packages, setPackages] = React.useState<Record<string, ReInstallPkg>>({});
 
     useEffect(() => {
         const search = searchVal.trim();
@@ -49,12 +44,20 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
         };
 
         // TODO: set state that blocks searching while search is already on
-        const foundPackages: Record<string, InstallPackage> = {};
+        const foundPackages: Record<string, ReInstallPkg> = {};
 
         PK.cancellableTransaction("SearchNames", [0, [search]], null/* () => console.log("state change") */, {
             Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
                 const fields = packageId.split(";");
-                foundPackages[packageId] = { name: fields[0], version: fields[1], severity: info, arch: fields[2], selected: false, summary };
+                foundPackages[packageId] = {
+                    name: fields[0],
+                    version: fields[1],
+                    severity: info,
+                    arch: fields[2],
+                    summary,
+                    id: packageId,
+                    isInstalled: !!installed[packageId]
+                };
                 // console.log(info); console.log(packageId); console.log(summary);
             },
         })
@@ -86,7 +89,7 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
                                 title: <Button onClick={async () => {
                                     await install_dialog(pkg.name)
                                 }}>
-                                    Install
+                                    {pkg.isInstalled ? _("Reinstall") : _("Install")}
                                 </Button>
                             },
                         ]

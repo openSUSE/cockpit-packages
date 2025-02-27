@@ -27,6 +27,7 @@ import { EmptyStatePanel } from "cockpit-components-empty-state";
 import cockpit from 'cockpit';
 import * as PK from "packagekit.js";
 import { useDialogs } from "dialogs.jsx";
+import { useInstalled } from './state';
 
 const _ = cockpit.gettext;
 
@@ -105,8 +106,7 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
 
 export const Remove = ({ searchVal }: { searchVal: string }) => {
     const Dialogs = useDialogs();
-    const [loading, setLoading] = React.useState(false);
-    const [allPackages, setAllPackages] = React.useState<Record<string, InstallPackage>>({});
+    const {installed, loading, refreshInstalled} = useInstalled();
     const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPackage>>({});
 
     useEffect(() => {
@@ -116,42 +116,22 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
         //       input feel more responsive
         const search = searchVal.trim().toLocaleLowerCase();
         if (search.length === 0) {
-            setFilteredPackages(allPackages);
+            setFilteredPackages(installed);
             return;
         };
 
         // TODO: set state that blocks searching while search is already on
         const foundPackages: Record<string, InstallPackage> = {};
-        for (const key of Object.keys(allPackages)) {
+        for (const key of Object.keys(installed)) {
             if (key.toLocaleLowerCase().includes(search)) {
-                foundPackages[key] = allPackages[key];
+                foundPackages[key] = installed[key];
             }
         }
         setFilteredPackages(foundPackages);
     }, [searchVal, setFilteredPackages, loading]);
 
-    const loadInstalledPkgs = () => {
-        setLoading(true);
-        const foundPackages: Record<string, InstallPackage> = {};
-
-        PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], null/* () => console.log("state change") */, {
-            Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
-                const fields = packageId.split(";");
-                foundPackages[packageId] = { name: fields[0], version: fields[1], severity: info, arch: fields[2], id: packageId, summary };
-            },
-        })
-            .then(/* transactionPath  */() => {
-                setAllPackages(foundPackages);
-                setFilteredPackages(foundPackages);
-            })
-            .catch(ex => {
-                console.log(ex);
-            })
-            .finally(() => setLoading(false));
-    }
-
     React.useEffect(() => {
-        loadInstalledPkgs();
+        refreshInstalled();
     }, []);
 
     if (loading) {
@@ -178,7 +158,7 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
                                 title: <Button onClick={() => Dialogs.show(
                                     <RemoveDialog
                                         pkg={pkg}
-                                        onUnInstalled={() => loadInstalledPkgs()}
+                                        onUnInstalled={() => refreshInstalled()}
                                     />
                                 )}>
                                     Uninstall

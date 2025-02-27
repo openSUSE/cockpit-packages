@@ -6,10 +6,11 @@ import { Remove } from './remove';
 import { WithDialogs } from 'dialogs';
 
 import cockpit from 'cockpit';
+import { InstalledStore } from './state';
 
 const _ = cockpit.gettext;
 
-export const Application: React.FunctionComponent = () => {
+const ApplicationInner: React.FunctionComponent = () => {
   const [method, setMethod] = React.useState<string>("uninstall");
   const [searchVal, setSearchVal] = React.useState<string>("");
   const [searchBufferedVal, setSearchBufferedVal] = React.useState<string>("");
@@ -26,10 +27,6 @@ export const Application: React.FunctionComponent = () => {
           return clearTimeout(timeout);
       }
   });
-
-  const tooltip = (
-    <Tooltip content="Aria-disabled tabs are like disabled tabs, but focusable. Allows for tooltip support." />
-  );
 
   return (
     <WithDialogs>
@@ -63,3 +60,11 @@ export const Application: React.FunctionComponent = () => {
     </WithDialogs>
   );
 };
+
+export const Application = () => {
+  return (
+    <InstalledStore>
+      <ApplicationInner />
+    </InstalledStore>
+  );
+}
