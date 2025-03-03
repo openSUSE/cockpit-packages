@@ -157,7 +157,7 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
                                         onUnInstalled={() => refreshInstalled()}
                                     />
                                 )}>
-                                    Uninstall
+                                    {_("Uninstall")}
                                 </Button>
                             },
                         ]
