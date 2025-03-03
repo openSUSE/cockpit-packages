@@ -1,12 +1,15 @@
 import React, { useEffect } from 'react';
-import { Tooltip, Page, PageSection, Flex, SearchInput, FlexItem, PageSectionVariants, ToggleGroup, ToggleGroupItem } from '@patternfly/react-core';
+import { Page, PageSection, Flex, SearchInput, FlexItem, PageSectionVariants, ToggleGroup, ToggleGroupItem, Stack, TextContent, TextVariants, Text } from '@patternfly/react-core';
 
 import { Install } from './install';
 import { Remove } from './remove';
 import { WithDialogs } from 'dialogs';
 
 import cockpit from 'cockpit';
+import { superuser } from 'superuser';
 import { InstalledStore } from './state';
+import { EmptyStatePanel } from 'cockpit-components-empty-state';
+import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 const _ = cockpit.gettext;
 
@@ -32,9 +35,38 @@ const SearchBox = ({onChange}: {onChange: (val: string) => void}) => {
   );
 }
 
+const AuthenticationError = () => {
+  return (
+    <Stack>
+        <EmptyStatePanel
+          title={ _("Authentication error") }
+          icon={ ExclamationCircleIcon }
+          paragraph={
+              <TextContent>
+                  <Text component={TextVariants.p}>
+                      {_("Administrative access is required.")}
+                  </Text>
+              </TextContent>
+          }
+        />
+    </Stack>
+);
+}
+
 const ApplicationInner: React.FunctionComponent = () => {
   const [method, setMethod] = React.useState<string>("uninstall");
   const [searchVal, setSearchVal] = React.useState<string>("");
+  const [authenticated, setAuthenticated] = React.useState(superuser.allowed);
+
+  React.useEffect(() => {
+    // cockpit doesn't provide type for addEventListener so it needs to be ignored
+    // @ts-ignore next
+    superuser.addEventListener("changed", () => {setAuthenticated(superuser.allowed)})
+  }, []);
+
+  if (!authenticated) {
+    return <AuthenticationError />
+  }
 
   return (
     <WithDialogs>
