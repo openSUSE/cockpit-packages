@@ -27,6 +27,7 @@ import { install_dialog } from "cockpit-components-install-dialog.jsx";
 import cockpit from 'cockpit';
 import * as PK from "packagekit.js";
 import { InstallPackage, useInstalled } from './state';
+import { EmptyStatePanel } from 'cockpit-components-empty-state';
 
 const _ = cockpit.gettext;
 
@@ -35,17 +36,21 @@ type ReInstallPkg = InstallPackage & { isInstalled: boolean };
 export const Install = ({ searchVal }: { searchVal: string }) => {
     const { installed } = useInstalled();
     const [packages, setPackages] = React.useState<Record<string, ReInstallPkg>>({});
+    const [pacakgesLoading, setPackagesLoadng] = React.useState(false);
 
     useEffect(() => {
+        if (pacakgesLoading)
+            return;
+
         const search = searchVal.trim();
         if (search.length === 0) {
             setPackages({});
             return;
         };
 
-        // TODO: set state that blocks searching while search is already on
         const foundPackages: Record<string, ReInstallPkg> = {};
 
+        setPackagesLoadng(true);
         PK.cancellableTransaction("SearchNames", [0, [search]], null/* () => console.log("state change") */, {
             Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
                 const fields = packageId.split(";");
@@ -66,8 +71,12 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
             })
             .catch(ex => {
                 console.log(ex);
-            });
+            }).finally(() => setPackagesLoadng(false));
     }, [searchVal, setPackages]);
+
+    if (pacakgesLoading) {
+        return <EmptyStatePanel loading />;
+    }
 
     return (
         <PageSection variant={PageSectionVariants.light} className="install-pkg">
