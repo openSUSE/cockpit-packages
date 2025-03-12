@@ -15,18 +15,19 @@
             {
                 "ObjectExpression": "first",
                 "CallExpression": {"arguments": "first"},
-                "MemberExpression": 2,
+                "MemberExpression": 4,
                 "ignoredNodes": [ "JSXAttribute" ]
             }],
-        "newline-per-chained-call": ["error", { "ignoreChainWithDepth": 2 }],
+        "newline-per-chained-call": "off",
         "no-var": "error",
         "lines-between-class-members": ["error", "always", { "exceptAfterSingleLine": true }],
         "prefer-promise-reject-errors": ["error", { "allowEmptyReject": true }],
         "react/jsx-indent": ["error", 4],
+        "react/jsx-indent-props": ["error", 4],
         "semi": ["error", "always", { "omitLastInOneLineBlock": true }],
 
         "react-hooks/rules-of-hooks": "error",
-        "react-hooks/exhaustive-deps": "error",
+        "react-hooks/exhaustive-deps": "off",
 
         "camelcase": "off",
         "comma-dangle": "off",
@@ -36,7 +37,6 @@
         "no-console": "off",
         "quotes": "off",
         "react/jsx-curly-spacing": "off",
-        "react/jsx-indent-props": "off",
         "react/jsx-no-useless-fragment": "error",
         "react/prop-types": "off",
         "space-before-function-paren": "off",
