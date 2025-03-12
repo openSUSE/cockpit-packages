@@ -18,7 +18,6 @@ export interface InstalledState {
     refreshInstalled: () => void,
 }
 
-
 export const InstalledContext = React.createContext({
     installed: {},
     loading: true,
@@ -38,15 +37,12 @@ export const InstalledStore: React.FC<{ children: React.ReactNode }> = props => 
                 const fields = packageId.split(";");
                 foundPackages[packageId] = { name: fields[0], version: fields[1], severity: info, arch: fields[2], id: packageId, summary };
             },
-        })
-            .then(() => {
-                setInstalled(foundPackages);
-            })
-            .catch(ex => {
-                console.log(ex);
-            })
-            .finally(() => setLoading(false));
-    }
+        }).then(() => {
+            setInstalled(foundPackages);
+        }).catch(ex => {
+            console.log(ex);
+        }).finally(() => setLoading(false));
+    };
 
     useEffect(() => {
         refreshInstalled();

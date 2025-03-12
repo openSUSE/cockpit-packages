@@ -46,7 +46,7 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
         if (search.length === 0) {
             setPackages({});
             return;
-        };
+        }
 
         const foundPackages: Record<string, ReInstallPkg> = {};
 
@@ -65,13 +65,11 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
                 };
                 // console.log(info); console.log(packageId); console.log(summary);
             },
-        })
-            .then(() => {
-                setPackages(foundPackages);
-            })
-            .catch(ex => {
-                console.log(ex);
-            }).finally(() => setPackagesLoadng(false));
+        }).then(() => {
+            setPackages(foundPackages);
+        }).catch(ex => {
+            console.log(ex);
+        }).finally(() => setPackagesLoadng(false));
     }, [searchVal, setPackages]);
 
     if (pacakgesLoading) {
@@ -80,7 +78,8 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
 
     return (
         <PageSection variant={PageSectionVariants.light} className="install-pkg">
-            <ListingTable aria-label={_("Found packages")}
+            <ListingTable
+                aria-label={_("Found packages")}
                 gridBreakPoint='grid-lg'
                 columns={[
                     { title: _("Name") },
@@ -95,14 +94,17 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
                             { title: pkg.version },
                             { title: pkg.summary.split("\n")[0] },
                             {
-                                title: <Button onClick={async () => {
-                                    await install_dialog(pkg.name)
-                                }}>
-                                    {pkg.isInstalled ? _("Reinstall") : _("Install")}
-                                </Button>
+                                title: (
+                                    <Button onClick={async () => {
+                                        await install_dialog(pkg.name);
+                                    }}
+                                    >
+                                        {pkg.isInstalled ? _("Reinstall") : _("Install")}
+                                    </Button>
+                                )
                             },
                         ]
-                    }
+                    };
                 })}
             />
         </PageSection>

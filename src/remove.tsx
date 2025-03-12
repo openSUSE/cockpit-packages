@@ -49,22 +49,20 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
         setLoading(true);
 
         PK.cancellableTransaction("RemovePackages", [0, [pkg.id], true, false], null/* (pevent: unknown) => console.log(pevent) */, {
-            Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
+            Package: () => {
             },
-        })
-            .then(() => {
-                onUnInstalled();
-                Dialogs.close();
-            })
-            .catch(ex => {
-                if (ex.message) {
-                    setError(ex.message);
-                    setLoading(false);
-                }
+        }).then(() => {
+            onUnInstalled();
+            Dialogs.close();
+        }).catch(ex => {
+            if (ex.message) {
+                setError(ex.message);
+                setLoading(false);
+            }
 
-                console.error(ex);
-            });
-    }
+            console.error(ex);
+        });
+    };
 
     return (
         <Modal
@@ -92,21 +90,23 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
                 </>
             }
         >
-            {error
-                ? <Alert variant="danger" isInline title={error} />
-                :
-                <>
-                    <p>{_("Uninstalling the following package:")}</p>
-                    <p>{pkg.name}</p>
-                </>
+            {
+                error
+                    ? <Alert variant="danger" isInline title={error} />
+                    : (
+                        <>
+                            <p>{_("Uninstalling the following package:")}</p>
+                            <p>{pkg.name}</p>
+                        </>
+                    )
             }
         </Modal>
     );
-}
+};
 
 export const Remove = ({ searchVal }: { searchVal: string }) => {
     const Dialogs = useDialogs();
-    const {installed, loading, refreshInstalled} = useInstalled();
+    const { installed, loading, refreshInstalled } = useInstalled();
     const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPackage>>({});
 
     useEffect(() => {
@@ -118,7 +118,7 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
         if (search.length === 0) {
             setFilteredPackages(installed);
             return;
-        };
+        }
 
         // TODO: set state that blocks searching while search is already on
         const foundPackages: Record<string, InstallPackage> = {};
@@ -136,7 +136,8 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
 
     return (
         <PageSection variant={PageSectionVariants.light} className="uninstall-pkg">
-            <ListingTable aria-label={_("Installed packages")}
+            <ListingTable
+                aria-label={_("Installed packages")}
                 gridBreakPoint='grid-lg'
                 columns={[
                     { title: _("Name") },
@@ -151,17 +152,20 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
                             { title: pkg.version },
                             { title: pkg.summary.split("\n")[0] },
                             {
-                                title: <Button onClick={() => Dialogs.show(
-                                    <RemoveDialog
-                                        pkg={pkg}
-                                        onUnInstalled={() => refreshInstalled()}
-                                    />
-                                )}>
-                                    {_("Uninstall")}
-                                </Button>
+                                title: (
+                                    <Button onClick={() => Dialogs.show(
+                                        <RemoveDialog
+                                            pkg={pkg}
+                                            onUnInstalled={() => refreshInstalled()}
+                                        />
+                                    )}
+                                    >
+                                        {_("Uninstall")}
+                                    </Button>
+                                )
                             },
                         ]
-                    }
+                    };
                 })}
             />
         </PageSection>
