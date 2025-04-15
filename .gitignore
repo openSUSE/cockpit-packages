@@ -29,6 +29,7 @@
 /packaging/debian/changelog
 /po/*.pot
  /po/LINGUAS
+!/po/packages.pot
 /test/common/
 /test/images/
 /test/static-code
