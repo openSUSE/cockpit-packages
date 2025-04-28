@@ -78,7 +78,7 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
                         isLoading={loading}
                         isDisabled={!!error}
                     >
-                        {_("Ok")}
+                        {_("OK")}
                     </Button>
                     <Button
                         variant="secondary"
