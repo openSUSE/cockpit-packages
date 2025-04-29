@@ -77,7 +77,7 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
     }
 
     return (
-        <PageSection variant={PageSectionVariants.light} className="install-pkg">
+        <PageSection variant={PageSectionVariants.default} className="install-pkg">
             <ListingTable
                 aria-label={_("Found packages")}
                 gridBreakPoint='grid-lg'

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Page, PageSection, Flex, SearchInput, FlexItem, PageSectionVariants, ToggleGroup, ToggleGroupItem, Stack, TextContent, TextVariants, Text } from '@patternfly/react-core';
+import { Page, PageSection, Flex, SearchInput, FlexItem, PageSectionVariants, ToggleGroup, ToggleGroupItem, Stack, ContentVariants, Content } from '@patternfly/react-core';
 
 import { Install } from './install';
 import { Remove } from './remove';
@@ -42,11 +42,9 @@ const AuthenticationError = () => {
                 title={ _("Authentication error") }
                 icon={ ExclamationCircleIcon }
                 paragraph={
-                    <TextContent>
-                        <Text component={TextVariants.p}>
-                            {_("Administrative access is required.")}
-                        </Text>
-                    </TextContent>
+                    <Content component={ContentVariants.p}>
+                        {_("Administrative access is required.")}
+                    </Content>
                 }
             />
         </Stack>
