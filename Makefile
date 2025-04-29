@@ -32,7 +32,7 @@ COCKPIT_REPO_FILES = \
 	$(NULL)
 
 COCKPIT_REPO_URL = https://github.com/cockpit-project/cockpit.git
-COCKPIT_REPO_COMMIT = 1986ae8b4a7a6cb55dfade9899c20dcf8306b707 # 331 + 73 commits
+COCKPIT_REPO_COMMIT = 2248c46ff19ce77dbf12e4d7fc6af0e702072171 # 337
 
 $(COCKPIT_REPO_FILES): $(COCKPIT_REPO_STAMP)
 COCKPIT_REPO_TREE = '$(strip $(COCKPIT_REPO_COMMIT))^{tree}'
@@ -59,10 +59,10 @@ po/$(PACKAGE_NAME).js.pot:
 		sed '/^#/ s/, c-format//' > $@
 
 po/$(PACKAGE_NAME).html.pot: $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP)
-	pkg/lib/html2po.js -o $@ $$(find src -name '*.html')
+	pkg/lib/html2po -o $@ $$(find src -name '*.html')
 
-po/$(PACKAGE_NAME).manifest.pot: $(NODE_MODULES_TEST) $(COCKPIT_REPO_STAMP)
-	pkg/lib/manifest2po.js src/manifest.json -o $@
+po/$(PACKAGE_NAME).manifest.pot: $(COCKPIT_REPO_STAMP)
+	pkg/lib/manifest2po -o $@ src/manifest.json
 
 po/$(PACKAGE_NAME).metainfo.pot: $(APPSTREAMFILE)
 	xgettext --default-domain=$(PACKAGE_NAME) --output=$@ $<
