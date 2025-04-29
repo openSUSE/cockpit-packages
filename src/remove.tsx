@@ -19,7 +19,7 @@
 
 import React, { useEffect } from 'react';
 import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
-import { Alert, Button, Modal } from '@patternfly/react-core';
+import { Alert, Button, Modal, ModalFooter, ModalHeader } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
 import { EmptyStatePanel } from "cockpit-components-empty-state";
@@ -69,37 +69,37 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
             title={_("Confirm uninstallation")}
             isOpen
             onClose={() => Dialogs.close()}
-            className='pf-v5-c-modal-box pf-m-align-top pf-m-md'
-            footer={
-                <>
-                    <Button
-                        variant="primary"
-                        onClick={() => uninstallPkg()}
-                        isLoading={loading}
-                        isDisabled={!!error}
-                    >
-                        {_("OK")}
-                    </Button>
-                    <Button
-                        variant="secondary"
-                        onClick={() => Dialogs.close()}
-                        isDisabled={loading}
-                    >
-                        {_("Cancel")}
-                    </Button>
-                </>
-            }
+            className='pf-v6-c-modal-box pf-m-align-top pf-m-md'
         >
-            {
-                error
-                    ? <Alert variant="danger" isInline title={error} />
-                    : (
-                        <>
-                            <p>{_("Uninstalling the following package:")}</p>
-                            <p>{pkg.name}</p>
-                        </>
-                    )
-            }
+            <ModalHeader>
+                {
+                    error
+                        ? <Alert variant="danger" isInline title={error} />
+                        : (
+                            <>
+                                <p>{_("Uninstalling the following package:")}</p>
+                                <p>{pkg.name}</p>
+                            </>
+                        )
+                }
+            </ModalHeader>
+            <ModalFooter>
+                <Button
+                    variant="primary"
+                    onClick={() => uninstallPkg()}
+                    isLoading={loading}
+                    isDisabled={!!error}
+                >
+                    {_("OK")}
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={() => Dialogs.close()}
+                    isDisabled={loading}
+                >
+                    {_("Cancel")}
+                </Button>
+            </ModalFooter>
         </Modal>
     );
 };
@@ -135,7 +135,7 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
     }
 
     return (
-        <PageSection variant={PageSectionVariants.light} className="uninstall-pkg">
+        <PageSection variant={PageSectionVariants.default} className="uninstall-pkg">
             <ListingTable
                 aria-label={_("Installed packages")}
                 gridBreakPoint='grid-lg'
