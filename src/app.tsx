@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import { Page, PageSection, Flex, SearchInput, FlexItem, PageSectionVariants, ToggleGroup, ToggleGroupItem, Stack, ContentVariants, Content } from '@patternfly/react-core';
+import { Page, PageSection, Flex, SearchInput, FlexItem, PageSectionVariants, ToggleGroup, ToggleGroupItem, Stack, ContentVariants, Content, PageSidebar } from '@patternfly/react-core';
 
 import { Install } from './install';
 import { Remove } from './remove';
@@ -51,6 +51,9 @@ const AuthenticationError = () => {
     );
 };
 
+// Hack to hide the Sidebar area in patternfly 6 Page
+const emptySidebar = <PageSidebar isSidebarOpen={false} />;
+
 const ApplicationInner: React.FunctionComponent = () => {
     const [method, setMethod] = React.useState<string>("uninstall");
     const [searchVal, setSearchVal] = React.useState<string>("");
@@ -68,8 +71,8 @@ const ApplicationInner: React.FunctionComponent = () => {
 
     return (
         <WithDialogs>
-            <Page>
-                <PageSection variant={PageSectionVariants.light} type="nav" className="pkg-management-header">
+            <Page sidebar={emptySidebar}>
+                <PageSection variant={PageSectionVariants.default} type="default" className="pkg-management-header">
                     <Flex>
                         <SearchBox onChange={setSearchVal} />
                         <FlexItem align={{ default: 'alignRight' }}>
