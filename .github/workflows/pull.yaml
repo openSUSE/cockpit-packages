@@ -27,3 +27,5 @@ jobs:
         run: npm run eslint
       - name: stylelint
         run: npm run stylelint
+      - name: typecheck
+        run: npm run typecheck
