@@ -16,7 +16,7 @@ msgstr ""
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 14:51+0530\n"
 "PO-Revision-Date: 2025-05-26 15:38+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
+"Last-Translator: Robert Simai <robert.simai@suse.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/cockpit/"
 "cockpit-packages/de/>\n"
 "Language: de\n"
@@ -65,7 +65,7 @@ msgstr ""
 
 #: src/remove.tsx:140
 msgid "Installed packages"
-msgstr ""
+msgstr "Installierte Pakete"
 
 #: src/install.tsx:85 src/remove.tsx:143
 msgid "Name"
