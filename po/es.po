@@ -1,0 +1,94 @@
+# #-#-#-#-#  packages.js.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+# #-#-#-#-#  packages.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#
+# SOME DESCRIPTIVE TITLE.
+# Copyright (C) YEAR THE PACKAGE'S COPYRIGHT HOLDER
+# This file is distributed under the same license as the PACKAGE package.
+# FIRST AUTHOR <EMAIL@ADDRESS>, YEAR.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PACKAGE VERSION\n"
+"Report-Msgid-Bugs-To: \n"
+"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
+"Last-Translator: Automatically generated\n"
+"Language-Team: none\n"
+"Language: es\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"X-Generator: Cockpit manifest2po\n"
+
+#: org.cockpit_project.packages.metainfo.xml:6
+#: org.cockpit_project.packages.metainfo.xml:8
+msgid "A cockpit module for (un)installing packages."
+msgstr ""
+
+#: src/app.tsx:47
+msgid "Administrative access is required."
+msgstr ""
+
+#: src/app.tsx:42
+msgid "Authentication error"
+msgstr ""
+
+#: src/remove.tsx:88
+msgid "Cancel"
+msgstr ""
+
+#: src/index.html:20
+msgid "Cockpit Packages"
+msgstr ""
+
+#: src/remove.tsx:69
+msgid "Confirm uninstallation"
+msgstr ""
+
+#: src/install.tsx:87 src/remove.tsx:145
+msgid "Details"
+msgstr ""
+
+#: src/install.tsx:82
+msgid "Found packages"
+msgstr ""
+
+#: src/app.tsx:88 src/install.tsx:102
+msgid "Install"
+msgstr ""
+
+#: src/remove.tsx:140
+msgid "Installed packages"
+msgstr ""
+
+#: src/install.tsx:85 src/remove.tsx:143
+msgid "Name"
+msgstr ""
+
+#: src/remove.tsx:81
+msgid "Ok"
+msgstr ""
+
+#: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
+msgid "Packages"
+msgstr ""
+
+#: src/install.tsx:102
+msgid "Reinstall"
+msgstr ""
+
+#: src/app.tsx:82 src/remove.tsx:163
+msgid "Uninstall"
+msgstr ""
+
+#: src/remove.tsx:98
+msgid "Uninstalling the following package:"
+msgstr ""
+
+#: src/install.tsx:86 src/remove.tsx:144
+msgid "Version"
+msgstr ""
