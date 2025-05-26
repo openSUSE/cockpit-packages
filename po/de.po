@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 14:51+0530\n"
-"PO-Revision-Date: 2025-05-26 15:38+0000\n"
+"PO-Revision-Date: 2025-05-26 15:42+0000\n"
 "Last-Translator: Robert Simai <robert.simai@suse.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/cockpit/"
 "cockpit-packages/de/>\n"
@@ -29,15 +29,15 @@ msgstr ""
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
 msgid "A cockpit module for (un)installing packages."
-msgstr ""
+msgstr "Ein Cockpit Modul zum (de-)installieren von Paketen."
 
 #: src/app.tsx:47
 msgid "Administrative access is required."
-msgstr ""
+msgstr "Administrativer Zugang benötigt."
 
 #: src/app.tsx:42
 msgid "Authentication error"
-msgstr ""
+msgstr "Authentifizierungsfehler"
 
 #: src/remove.tsx:88
 msgid "Cancel"
@@ -45,23 +45,23 @@ msgstr "Abbrechen"
 
 #: src/index.html:20
 msgid "Cockpit Packages"
-msgstr ""
+msgstr "Cockpit Pakete"
 
 #: src/remove.tsx:69
 msgid "Confirm uninstallation"
-msgstr ""
+msgstr "Deinstallation bestätigen"
 
 #: src/install.tsx:87 src/remove.tsx:145
 msgid "Details"
-msgstr ""
+msgstr "Details"
 
 #: src/install.tsx:82
 msgid "Found packages"
-msgstr ""
+msgstr "Gefundene Pakete"
 
 #: src/app.tsx:88 src/install.tsx:102
 msgid "Install"
-msgstr ""
+msgstr "Installieren"
 
 #: src/remove.tsx:140
 msgid "Installed packages"
@@ -69,28 +69,28 @@ msgstr "Installierte Pakete"
 
 #: src/install.tsx:85 src/remove.tsx:143
 msgid "Name"
-msgstr "Benennen"
+msgstr "Name"
 
 #: src/remove.tsx:81
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
-msgstr ""
+msgstr "Pakete"
 
 #: src/install.tsx:102
 msgid "Reinstall"
-msgstr ""
+msgstr "Neu Installieren"
 
 #: src/app.tsx:82 src/remove.tsx:163
 msgid "Uninstall"
-msgstr ""
+msgstr "Deinstallieren"
 
 #: src/remove.tsx:98
 msgid "Uninstalling the following package:"
-msgstr ""
+msgstr "Deinstallieren der folgenden Pakete:"
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
-msgstr ""
+msgstr "Version"
