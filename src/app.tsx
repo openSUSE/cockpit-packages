@@ -60,8 +60,6 @@ const ApplicationInner: React.FunctionComponent = () => {
     const [authenticated, setAuthenticated] = React.useState(superuser.allowed);
 
     React.useEffect(() => {
-    // cockpit doesn't provide type for addEventListener so it needs to be ignored
-    // @ts-expect-error addEventListener method is not added to type definitions yet
         superuser.addEventListener("changed", () => { setAuthenticated(superuser.allowed) });
     }, []);
 
