@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 14:51+0530\n"
-"PO-Revision-Date: 2025-05-26 15:37+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2025-06-05 04:59+0000\n"
+"Last-Translator: Carina Hagl <vistatec_pm@sunflare.co.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/cockpit/"
 "cockpit-packages/ja/>\n"
 "Language: ja\n"
@@ -29,15 +29,15 @@ msgstr ""
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
 msgid "A cockpit module for (un)installing packages."
-msgstr ""
+msgstr "パッケージをインストール(アンインストール)するためのCockpitモジュール。"
 
 #: src/app.tsx:47
 msgid "Administrative access is required."
-msgstr ""
+msgstr "管理者アクセスが必要です。"
 
 #: src/app.tsx:42
 msgid "Authentication error"
-msgstr ""
+msgstr "認証エラー"
 
 #: src/remove.tsx:88
 msgid "Cancel"
@@ -45,27 +45,27 @@ msgstr "キャンセル"
 
 #: src/index.html:20
 msgid "Cockpit Packages"
-msgstr ""
+msgstr "Cockpitパッケージ"
 
 #: src/remove.tsx:69
 msgid "Confirm uninstallation"
-msgstr ""
+msgstr "アンインストールの確認"
 
 #: src/install.tsx:87 src/remove.tsx:145
 msgid "Details"
-msgstr ""
+msgstr "詳細"
 
 #: src/install.tsx:82
 msgid "Found packages"
-msgstr ""
+msgstr "見つかったパッケージ"
 
 #: src/app.tsx:88 src/install.tsx:102
 msgid "Install"
-msgstr ""
+msgstr "インストール"
 
 #: src/remove.tsx:140
 msgid "Installed packages"
-msgstr ""
+msgstr "インストールされたパッケージ"
 
 #: src/install.tsx:85 src/remove.tsx:143
 msgid "Name"
@@ -73,24 +73,24 @@ msgstr "名前"
 
 #: src/remove.tsx:81
 msgid "Ok"
-msgstr ""
+msgstr "OK"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
-msgstr ""
+msgstr "パッケージ"
 
 #: src/install.tsx:102
 msgid "Reinstall"
-msgstr ""
+msgstr "再インストール"
 
 #: src/app.tsx:82 src/remove.tsx:163
 msgid "Uninstall"
-msgstr ""
+msgstr "アンインストール"
 
 #: src/remove.tsx:98
 msgid "Uninstalling the following package:"
-msgstr ""
+msgstr "以下のパッケージをアンインストールしています:"
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
-msgstr ""
+msgstr "バージョン"
