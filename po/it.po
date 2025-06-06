@@ -15,8 +15,8 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2025-04-15 14:51+0530\n"
-"PO-Revision-Date: 2025-05-26 14:39+0000\n"
-"Last-Translator: anonymous <noreply@weblate.org>\n"
+"PO-Revision-Date: 2025-06-06 09:59+0000\n"
+"Last-Translator: Davide Aiello <davide.aiello@novilingulists.com>\n"
 "Language-Team: Italian <https://l10n.opensuse.org/projects/cockpit/"
 "cockpit-packages/it/>\n"
 "Language: it\n"
@@ -29,15 +29,15 @@ msgstr ""
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
 msgid "A cockpit module for (un)installing packages."
-msgstr ""
+msgstr "Un modulo del cockpit per (dis)installare i pacchetti."
 
 #: src/app.tsx:47
 msgid "Administrative access is required."
-msgstr ""
+msgstr "Accesso da amministratore richesto."
 
 #: src/app.tsx:42
 msgid "Authentication error"
-msgstr ""
+msgstr "Errore di autenticazione"
 
 #: src/remove.tsx:88
 msgid "Cancel"
@@ -45,52 +45,52 @@ msgstr "Annulla"
 
 #: src/index.html:20
 msgid "Cockpit Packages"
-msgstr ""
+msgstr "Pacchetti del cockpit"
 
 #: src/remove.tsx:69
 msgid "Confirm uninstallation"
-msgstr ""
+msgstr "Conferma disinstallazione"
 
 #: src/install.tsx:87 src/remove.tsx:145
 msgid "Details"
-msgstr ""
+msgstr "Dettagli"
 
 #: src/install.tsx:82
 msgid "Found packages"
-msgstr ""
+msgstr "Pacchetti trovati"
 
 #: src/app.tsx:88 src/install.tsx:102
 msgid "Install"
-msgstr ""
+msgstr "Installa"
 
 #: src/remove.tsx:140
 msgid "Installed packages"
-msgstr ""
+msgstr "Pacchetti installati"
 
 #: src/install.tsx:85 src/remove.tsx:143
 msgid "Name"
-msgstr ""
+msgstr "Nome"
 
 #: src/remove.tsx:81
 msgid "Ok"
-msgstr ""
+msgstr "Ok"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
-msgstr ""
+msgstr "Pacchetti"
 
 #: src/install.tsx:102
 msgid "Reinstall"
-msgstr ""
+msgstr "Reinstalla"
 
 #: src/app.tsx:82 src/remove.tsx:163
 msgid "Uninstall"
-msgstr ""
+msgstr "Disinstalla"
 
 #: src/remove.tsx:98
 msgid "Uninstalling the following package:"
-msgstr ""
+msgstr "Disinstallazione del seguente pacchetto:"
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
-msgstr ""
+msgstr "Versione"
