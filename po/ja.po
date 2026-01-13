@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"POT-Creation-Date: 2026-01-13 10:26+0000\n"
 "PO-Revision-Date: 2026-01-09 01:04+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/cockpit/cockpit-"
@@ -29,9 +29,10 @@ msgstr ""
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
 msgid "A cockpit module for (un)installing packages."
-msgstr "パッケージをインストール(アンインストール)するためのCockpitモジュール。"
+msgstr ""
+"パッケージをインストール(アンインストール)するためのCockpitモジュール。"
 
-#: src/app.tsx:47
+#: src/app.tsx:46
 msgid "Administrative access is required."
 msgstr "管理者でアクセスする必要があります。"
 
@@ -39,7 +40,7 @@ msgstr "管理者でアクセスする必要があります。"
 msgid "Authentication error"
 msgstr "認証エラー"
 
-#: src/remove.tsx:88
+#: src/remove.tsx:100
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -59,7 +60,7 @@ msgstr "詳細"
 msgid "Found packages"
 msgstr "見つかったパッケージ"
 
-#: src/app.tsx:88 src/install.tsx:102
+#: src/app.tsx:87 src/install.tsx:102
 msgid "Install"
 msgstr "インストール"
 
@@ -71,9 +72,9 @@ msgstr "インストールされたパッケージ"
 msgid "Name"
 msgstr "名前"
 
-#: src/remove.tsx:81
-msgid "Ok"
-msgstr "OK"
+#: src/remove.tsx:93
+msgid "OK"
+msgstr ""
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
@@ -83,14 +84,17 @@ msgstr "パッケージ"
 msgid "Reinstall"
 msgstr "再インストール"
 
-#: src/app.tsx:82 src/remove.tsx:163
+#: src/app.tsx:81 src/remove.tsx:163
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#: src/remove.tsx:98
+#: src/remove.tsx:80
 msgid "Uninstalling the following package:"
 msgstr "以下のパッケージをアンインストールしています:"
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
 msgstr "バージョン"
+
+#~ msgid "Ok"
+#~ msgstr "OK"

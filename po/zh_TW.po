@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"POT-Creation-Date: 2026-01-13 10:26+0000\n"
 "PO-Revision-Date: 2025-06-05 04:59+0000\n"
 "Last-Translator: Grace Yu <grace.yu@excel-gits.com>\n"
 "Language-Team: Chinese (Taiwan) <https://l10n.opensuse.org/projects/cockpit/"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr "用於安裝 (解除安裝) 套件的 Cockpit 模組。"
 
-#: src/app.tsx:47
+#: src/app.tsx:46
 msgid "Administrative access is required."
 msgstr "需要管理存取權。"
 
@@ -39,7 +39,7 @@ msgstr "需要管理存取權。"
 msgid "Authentication error"
 msgstr "驗證錯誤"
 
-#: src/remove.tsx:88
+#: src/remove.tsx:100
 msgid "Cancel"
 msgstr "取消"
 
@@ -59,7 +59,7 @@ msgstr "詳細資料"
 msgid "Found packages"
 msgstr "找到的套件"
 
-#: src/app.tsx:88 src/install.tsx:102
+#: src/app.tsx:87 src/install.tsx:102
 msgid "Install"
 msgstr "安裝"
 
@@ -71,9 +71,9 @@ msgstr "安裝的套件"
 msgid "Name"
 msgstr "名稱"
 
-#: src/remove.tsx:81
-msgid "Ok"
-msgstr "確定"
+#: src/remove.tsx:93
+msgid "OK"
+msgstr ""
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
@@ -83,14 +83,17 @@ msgstr "套件"
 msgid "Reinstall"
 msgstr "重新安裝"
 
-#: src/app.tsx:82 src/remove.tsx:163
+#: src/app.tsx:81 src/remove.tsx:163
 msgid "Uninstall"
 msgstr "解除安裝"
 
-#: src/remove.tsx:98
+#: src/remove.tsx:80
 msgid "Uninstalling the following package:"
 msgstr "正在解除安裝以下套件："
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
 msgstr "版本"
+
+#~ msgid "Ok"
+#~ msgstr "確定"

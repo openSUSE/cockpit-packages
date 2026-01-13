@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"POT-Creation-Date: 2026-01-13 10:26+0000\n"
 "PO-Revision-Date: 2025-06-05 00:59+0000\n"
 "Last-Translator: Samanta Magalhaes <samanta_texttrans@outlook.com>\n"
 "Language-Team: Portuguese (Brazil) <https://l10n.opensuse.org/projects/"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr "Um módulo do cockpit para (des)instalação de pacotes."
 
-#: src/app.tsx:47
+#: src/app.tsx:46
 msgid "Administrative access is required."
 msgstr "Acesso administrativo obrigatório."
 
@@ -39,7 +39,7 @@ msgstr "Acesso administrativo obrigatório."
 msgid "Authentication error"
 msgstr "Erro de autenticação"
 
-#: src/remove.tsx:88
+#: src/remove.tsx:100
 msgid "Cancel"
 msgstr "Cancelar"
 
@@ -59,7 +59,7 @@ msgstr "Detalhes"
 msgid "Found packages"
 msgstr "Pacotes encontrados"
 
-#: src/app.tsx:88 src/install.tsx:102
+#: src/app.tsx:87 src/install.tsx:102
 msgid "Install"
 msgstr "Instalar"
 
@@ -71,9 +71,9 @@ msgstr "Pacotes instalados"
 msgid "Name"
 msgstr "Nome"
 
-#: src/remove.tsx:81
-msgid "Ok"
-msgstr "OK"
+#: src/remove.tsx:93
+msgid "OK"
+msgstr ""
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
@@ -83,14 +83,17 @@ msgstr "Pacotes"
 msgid "Reinstall"
 msgstr "Reinstalar"
 
-#: src/app.tsx:82 src/remove.tsx:163
+#: src/app.tsx:81 src/remove.tsx:163
 msgid "Uninstall"
 msgstr "Desinstalar"
 
-#: src/remove.tsx:98
+#: src/remove.tsx:80
 msgid "Uninstalling the following package:"
 msgstr "Desinstalando o seguinte pacote:"
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
 msgstr "Versão"
+
+#~ msgid "Ok"
+#~ msgstr "OK"

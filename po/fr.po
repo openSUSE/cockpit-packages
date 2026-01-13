@@ -14,11 +14,11 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"POT-Creation-Date: 2026-01-13 10:26+0000\n"
 "PO-Revision-Date: 2025-06-05 16:59+0000\n"
 "Last-Translator: Sophie Leroy <sophie@stoquart.com>\n"
-"Language-Team: French <https://l10n.opensuse.org/projects/cockpit/"
-"cockpit-packages/fr/>\n"
+"Language-Team: French <https://l10n.opensuse.org/projects/cockpit/cockpit-"
+"packages/fr/>\n"
 "Language: fr\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
@@ -31,7 +31,7 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr "Module Cockpit pour (dés)installer des paquets."
 
-#: src/app.tsx:47
+#: src/app.tsx:46
 msgid "Administrative access is required."
 msgstr "Un accès administratif est requis."
 
@@ -39,7 +39,7 @@ msgstr "Un accès administratif est requis."
 msgid "Authentication error"
 msgstr "Erreur d'authentification"
 
-#: src/remove.tsx:88
+#: src/remove.tsx:100
 msgid "Cancel"
 msgstr "Annuler"
 
@@ -59,7 +59,7 @@ msgstr "Détails"
 msgid "Found packages"
 msgstr "Paquets trouvés"
 
-#: src/app.tsx:88 src/install.tsx:102
+#: src/app.tsx:87 src/install.tsx:102
 msgid "Install"
 msgstr "Installer"
 
@@ -71,9 +71,9 @@ msgstr "Paquets installés"
 msgid "Name"
 msgstr "Nom"
 
-#: src/remove.tsx:81
-msgid "Ok"
-msgstr "OK"
+#: src/remove.tsx:93
+msgid "OK"
+msgstr ""
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
@@ -83,14 +83,17 @@ msgstr "Paquets"
 msgid "Reinstall"
 msgstr "Réinstaller"
 
-#: src/app.tsx:82 src/remove.tsx:163
+#: src/app.tsx:81 src/remove.tsx:163
 msgid "Uninstall"
 msgstr "Désinstaller"
 
-#: src/remove.tsx:98
+#: src/remove.tsx:80
 msgid "Uninstalling the following package:"
 msgstr "Désinstallation du paquet suivant :"
 
 #: src/install.tsx:86 src/remove.tsx:144
 msgid "Version"
 msgstr "Version"
+
+#~ msgid "Ok"
+#~ msgstr "OK"
