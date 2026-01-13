@@ -22,7 +22,7 @@ msgstr ""
 "#-#-#-#-#  packages.js.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"POT-Creation-Date: 2026-01-13 10:26+0000\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 "#-#-#-#-#  packages.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-15 14:51+0530\n"
+"POT-Creation-Date: 2025-04-17 07:48+0100\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,7 +53,7 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr ""
 
-#: src/app.tsx:47
+#: src/app.tsx:46
 msgid "Administrative access is required."
 msgstr ""
 
@@ -61,7 +61,7 @@ msgstr ""
 msgid "Authentication error"
 msgstr ""
 
-#: src/remove.tsx:88
+#: src/remove.tsx:100
 msgid "Cancel"
 msgstr ""
 
@@ -81,7 +81,7 @@ msgstr ""
 msgid "Found packages"
 msgstr ""
 
-#: src/app.tsx:88 src/install.tsx:102
+#: src/app.tsx:87 src/install.tsx:102
 msgid "Install"
 msgstr ""
 
@@ -93,8 +93,8 @@ msgstr ""
 msgid "Name"
 msgstr ""
 
-#: src/remove.tsx:81
-msgid "Ok"
+#: src/remove.tsx:93
+msgid "OK"
 msgstr ""
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
@@ -105,11 +105,11 @@ msgstr ""
 msgid "Reinstall"
 msgstr ""
 
-#: src/app.tsx:82 src/remove.tsx:163
+#: src/app.tsx:81 src/remove.tsx:163
 msgid "Uninstall"
 msgstr ""
 
-#: src/remove.tsx:98
+#: src/remove.tsx:80
 msgid "Uninstalling the following package:"
 msgstr ""
 
