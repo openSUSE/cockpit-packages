@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-13 10:26+0000\n"
-"PO-Revision-Date: 2026-01-09 01:04+0000\n"
+"PO-Revision-Date: 2026-01-14 04:04+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/cockpit/cockpit-"
 "packages/ja/>\n"
@@ -74,7 +74,7 @@ msgstr "名前"
 
 #: src/remove.tsx:93
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
