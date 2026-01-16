@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-13 10:26+0000\n"
-"PO-Revision-Date: 2026-01-11 01:04+0000\n"
+"PO-Revision-Date: 2026-01-16 21:04+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/cockpit/cockpit-"
 "packages/de/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
@@ -73,7 +73,7 @@ msgstr "Name"
 
 #: src/remove.tsx:93
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
