@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-13 10:26+0000\n"
-"PO-Revision-Date: 2025-10-09 18:59+0000\n"
+"PO-Revision-Date: 2026-01-22 05:04+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/cockpit/"
 "cockpit-packages/id/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.13.3\n"
+"X-Generator: Weblate 5.15.2\n"
 
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
@@ -37,7 +37,7 @@ msgstr "Akses administratif diperlukan."
 
 #: src/app.tsx:42
 msgid "Authentication error"
-msgstr "Kesalahan otentikasi"
+msgstr "Kesalahan autentikasi"
 
 #: src/remove.tsx:100
 msgid "Cancel"
