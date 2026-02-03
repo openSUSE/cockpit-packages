@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-01-13 10:26+0000\n"
-"PO-Revision-Date: 2026-01-22 05:04+0000\n"
+"PO-Revision-Date: 2026-02-03 05:04+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/cockpit/"
 "cockpit-packages/id/>\n"
@@ -73,7 +73,7 @@ msgstr "Nama"
 
 #: src/remove.tsx:93
 msgid "OK"
-msgstr ""
+msgstr "Oke"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
