@@ -7,7 +7,7 @@ import { WithDialogs } from 'dialogs';
 
 import cockpit from 'cockpit';
 import { superuser } from 'superuser';
-import { InstalledStore } from './state';
+import { InstalledStore, useInstalled } from './state';
 import { EmptyStatePanel } from 'cockpit-components-empty-state';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
@@ -55,6 +55,7 @@ const AuthenticationError = () => {
 const emptySidebar = <PageSidebar isSidebarOpen={false} />;
 
 const ApplicationInner: React.FunctionComponent = () => {
+    const { backendState } = useInstalled();
     const [method, setMethod] = React.useState<string>("uninstall");
     const [searchVal, setSearchVal] = React.useState<string>("");
     const [authenticated, setAuthenticated] = React.useState(superuser.allowed);
@@ -62,6 +63,11 @@ const ApplicationInner: React.FunctionComponent = () => {
     React.useEffect(() => {
         superuser.addEventListener("changed", () => { setAuthenticated(superuser.allowed) });
     }, []);
+
+    if (backendState.locked) {
+        // TODO: backend specific message + translations
+        return <EmptyStatePanel loading title="Backend is locked. Waiting for the lock to be released" />;
+    }
 
     if (!authenticated) {
         return <AuthenticationError />;

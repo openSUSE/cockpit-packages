@@ -1,5 +1,5 @@
 import * as PK from "packagekit.js";
-import { Backend, Package } from "./backend";
+import { Backend, Package, ProgressCB, ProgressState } from "./backend";
 // import { getPackageManager } from "packagemanager";
 import { PackageKitManager } from "_internal/packagekit";
 import { TransactionError } from "packagekit";
@@ -8,21 +8,56 @@ import { TransactionError } from "packagekit";
 // Often happens when cockpit-tukit calls zypper, which takes the zypper lock.
 const PK_ERROR_ENUM_FAILED_INITIALIZATION = 22;
 
+class PackageKitState {
+    cb: ProgressCB;
+    state: ProgressState;
+
+    constructor(cb: ProgressCB) {
+        this.cb = cb;
+        this.state = { loading: true };
+    }
+
+    sendUpdate() {
+        this.cb(this.state);
+    }
+
+    setLocked() {
+        if (!this.state.locked) {
+            this.state.locked = true;
+            this.sendUpdate();
+        }
+    }
+
+    setUnlocked() {
+        if (this.state.locked) {
+            this.state.locked = false;
+            this.sendUpdate();
+        }
+    }
+
+    done() {
+        this.state = { done: true };
+        this.sendUpdate();
+    }
+}
+
 const sleep = (ms: number) => {
     return new Promise(resolve => setTimeout(resolve, ms));
 };
 
-const tryWaitZyppLock = async (cb: () => Promise<void>) => {
+const tryWaitZyppLock = async (state: PackageKitState, cb: () => Promise<void>) => {
     const maxCount = 5;
     for (let count = 1; count <= maxCount; count++) {
         try {
             await cb();
+            state.setUnlocked();
             return Promise.resolve();
         } catch (e) {
             const ex = e as Error;
             if (ex instanceof TransactionError) {
                 // XXX: might be worth it to check if the error details contain "zypper"
                 if (count < maxCount && ex.code === PK_ERROR_ENUM_FAILED_INITIALIZATION) {
+                    state.setLocked();
                     await sleep(10 * 1000);
                 } else {
                     return Promise.reject(ex);
@@ -35,11 +70,12 @@ const tryWaitZyppLock = async (cb: () => Promise<void>) => {
 };
 
 export class PackageKit implements Backend {
-    getInstalled(): Promise<Package[]> {
+    getInstalled(cb: ProgressCB): Promise<Package[]> {
+        const state = new PackageKitState(cb);
         return new Promise((resolve, reject) => {
             const installed: Package[] = [];
-            tryWaitZyppLock(() =>
-                PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], null, {
+            tryWaitZyppLock(state, () =>
+                PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], {
                     Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
                         const fields = packageId.split(";");
                         installed.push({
@@ -51,6 +87,7 @@ export class PackageKit implements Backend {
                     },
                 })
             ).then(() => {
+                state.done();
                 resolve(installed);
             }).catch(ex => {
                 console.log(ex);
@@ -59,10 +96,11 @@ export class PackageKit implements Backend {
         });
     }
 
-    searchPackages(pkgName: string): Promise<Package[]> {
+    searchPackages(pkgName: string, cb: ProgressCB): Promise<Package[]> {
         return new Promise((resolve, reject) => {
             const found: Package[] = [];
-            tryWaitZyppLock(() =>
+            const state = new PackageKitState(cb);
+            tryWaitZyppLock(state, () =>
                 PK.cancellableTransaction("SearchNames", [0, [pkgName]], null, {
                     Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
                         const fields = packageId.split(";");
@@ -75,6 +113,7 @@ export class PackageKit implements Backend {
                     },
                 })
             ).then(() => {
+                state.done();
                 resolve(found);
             }).catch(ex => {
                 console.log(ex);
