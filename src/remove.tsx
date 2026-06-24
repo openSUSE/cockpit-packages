@@ -25,22 +25,13 @@ import { ListingTable } from 'cockpit-components-table.jsx';
 import { EmptyStatePanel } from "cockpit-components-empty-state";
 
 import cockpit from 'cockpit';
-import * as PK from "packagekit.js";
 import { useDialogs } from "dialogs.jsx";
 import { useInstalled } from './state';
+import { getBackend, Package } from './backend/backend';
 
 const _ = cockpit.gettext;
 
-export type InstallPackage = {
-    name: string,
-    version: string,
-    severity: typeof PK.Enum,
-    arch: string,
-    summary: string,
-    id: string,
-}
-
-const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstalled: () => void }) => {
+const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: Package, onUnInstalled: () => void }) => {
     const Dialogs = useDialogs();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
@@ -48,10 +39,9 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
     const uninstallPkg = () => {
         setLoading(true);
 
-        PK.cancellableTransaction("RemovePackages", [0, [pkg.id], true, false], null/* (pevent: unknown) => console.log(pevent) */, {
-            Package: () => {
-            },
-        }).then(() => {
+        getBackend().unInstallPackages(
+            [pkg.id]
+        ).then(() => {
             onUnInstalled();
             Dialogs.close();
         }).catch(ex => {
@@ -107,7 +97,7 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: InstallPackage, onUnInstall
 export const Remove = ({ searchVal }: { searchVal: string }) => {
     const Dialogs = useDialogs();
     const { installed, loading, refreshInstalled } = useInstalled();
-    const [filteredPackages, setFilteredPackages] = React.useState<Record<string, InstallPackage>>({});
+    const [filteredPackages, setFilteredPackages] = React.useState<Record<string, Package>>({});
 
     useEffect(() => {
         if (loading)
@@ -121,7 +111,7 @@ export const Remove = ({ searchVal }: { searchVal: string }) => {
         }
 
         // TODO: set state that blocks searching while search is already on
-        const foundPackages: Record<string, InstallPackage> = {};
+        const foundPackages: Record<string, Package> = {};
         for (const key of Object.keys(installed)) {
             if (key.toLocaleLowerCase().includes(search)) {
                 foundPackages[key] = installed[key];

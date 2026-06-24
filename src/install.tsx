@@ -17,23 +17,81 @@
  * along with Cockpit; If not, see <http://www.gnu.org/licenses/>.
  */
 
-import React, { useEffect } from 'react';
+import React, { useCallback, useEffect } from 'react';
 import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
-import { Button } from '@patternfly/react-core';
+import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
-import { install_dialog } from "cockpit-components-install-dialog.jsx";
 
 import cockpit from 'cockpit';
-import * as PK from "packagekit.js";
-import { InstallPackage, useInstalled } from './state';
+import { useInstalled } from './state';
 import { EmptyStatePanel } from 'cockpit-components-empty-state';
+import { getBackend, Package } from './backend/backend';
+import { useDialogs } from 'dialogs';
 
 const _ = cockpit.gettext;
 
-type ReInstallPkg = InstallPackage & { isInstalled: boolean };
+type ReInstallPkg = Package & { isInstalled: boolean };
+
+const InstallDialog = ({ pkg }: { pkg: Package }) => {
+    // TODO: loading and error indicatiors
+    const Dialogs = useDialogs();
+    const [additional, setAddional] = React.useState<string[] | null>(null);
+
+    useEffect(() => {
+        getBackend().getMissingDependencies(pkg.name).then((pkgs) => {
+            setAddional(pkgs);
+        });
+    }, []);
+
+    const installPkg = useCallback(async () => {
+        console.log("installing", pkg);
+        if (additional) {
+            await getBackend().installPackages(additional);
+        }
+        Dialogs.close();
+    }, [additional]);
+
+    return (
+        <Modal
+            title={_("Confirm uninstallation")}
+            isOpen
+            onClose={() => Dialogs.close()}
+            className='pf-v6-c-modal-box pf-m-align-top pf-m-md'
+        >
+            <ModalHeader>
+                <>
+                    <p>{_("Installing the following package:")}</p>
+                    <p>{pkg.name}</p>
+                </>
+            </ModalHeader>
+            {additional &&
+            <ModalBody>
+                <div>
+                    {_("Additional packages:")}
+                    <ul>{additional.map(id => <li key={id}>{id}</li>)}</ul>
+                </div>
+            </ModalBody>}
+            <ModalFooter>
+                <Button
+                    variant="primary"
+                    onClick={() => installPkg()}
+                >
+                    {_("Install")}
+                </Button>
+                <Button
+                    variant="secondary"
+                    onClick={() => Dialogs.close()}
+                >
+                    {_("Cancel")}
+                </Button>
+            </ModalFooter>
+        </Modal>
+    );
+};
 
 export const Install = ({ searchVal }: { searchVal: string }) => {
+    const Dialogs = useDialogs();
     const { installed } = useInstalled();
     const [packages, setPackages] = React.useState<Record<string, ReInstallPkg>>({});
     const [pacakgesLoading, setPackagesLoadng] = React.useState(false);
@@ -51,21 +109,13 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
         const foundPackages: Record<string, ReInstallPkg> = {};
 
         setPackagesLoadng(true);
-        PK.cancellableTransaction("SearchNames", [0, [search]], null/* () => console.log("state change") */, {
-            Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
-                const fields = packageId.split(";");
-                foundPackages[packageId] = {
-                    name: fields[0],
-                    version: fields[1],
-                    severity: info,
-                    arch: fields[2],
-                    summary,
-                    id: packageId,
-                    isInstalled: !!installed[packageId]
-                };
-                // console.log(info); console.log(packageId); console.log(summary);
-            },
-        }).then(() => {
+        getBackend().searchPackages(
+            search
+        ).then((pkgs) => {
+            for (const pkg of pkgs) {
+                // TODO: return the installed information from backend so we don't need to do these copies
+                foundPackages[pkg.id] = { ...pkg, isInstalled: !!installed[pkg.id] };
+            }
             setPackages(foundPackages);
         }).catch(ex => {
             console.log(ex);
@@ -95,8 +145,8 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
                             { title: pkg.summary.split("\n")[0] },
                             {
                                 title: (
-                                    <Button onClick={async () => {
-                                        await install_dialog(pkg.name);
+                                    <Button onClick={() => {
+                                        Dialogs.show(<InstallDialog pkg={pkg} />);
                                     }}
                                     >
                                         {pkg.isInstalled ? _("Reinstall") : _("Install")}
