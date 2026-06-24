@@ -1,18 +1,9 @@
 import React, { useEffect } from "react";
 
-import * as PK from "packagekit.js";
-
-export type InstallPackage = {
-    name: string,
-    version: string,
-    severity: typeof PK.Enum,
-    arch: string,
-    summary: string,
-    id: string
-}
+import { getBackend, Package } from "./backend/backend";
 
 export interface InstalledState {
-    installed: Record<string, InstallPackage>,
+    installed: Record<string, Package>,
     loading: boolean,
     /* TODO: error */
     refreshInstalled: () => void,
@@ -25,23 +16,21 @@ export const InstalledContext = React.createContext({
 });
 
 export const InstalledStore: React.FC<{ children: React.ReactNode }> = props => {
-    const [installed, setInstalled] = React.useState<Record<string, InstallPackage>>({});
+    const [installed, setInstalled] = React.useState<Record<string, Package>>({});
     const [loading, setLoading] = React.useState(true);
 
     const refreshInstalled = () => {
         setLoading(true);
-        const foundPackages: Record<string, InstallPackage> = {};
-
-        PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], null/* () => console.log("state change") */, {
-            Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
-                const fields = packageId.split(";");
-                foundPackages[packageId] = { name: fields[0], version: fields[1], severity: info, arch: fields[2], id: packageId, summary };
-            },
-        }).then(() => {
-            setInstalled(foundPackages);
-        }).catch(ex => {
-            console.log(ex);
-        }).finally(() => setLoading(false));
+        const foundPackages: Record<string, Package> = {};
+        getBackend().getInstalled()
+                        .then((packages) => {
+                            for (const pkg of packages) {
+                                foundPackages[pkg.id] = pkg;
+                            }
+                            setInstalled(foundPackages);
+                        }).catch(ex => {
+                            console.log(ex);
+                        }).finally(() => setLoading(false));
     };
 
     useEffect(() => {
