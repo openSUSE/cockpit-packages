@@ -110,7 +110,9 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
 
         setPackagesLoadng(true);
         getBackend().searchPackages(
-            search
+            search,
+            // TODO:
+            () => { },
         ).then((pkgs) => {
             for (const pkg of pkgs) {
                 // TODO: return the installed information from backend so we don't need to do these copies

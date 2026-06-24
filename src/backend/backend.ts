@@ -9,10 +9,18 @@ export type Package = {
     // arch: string,
 }
 
-// TODO: introduce "onProgress" callbacks
+export interface ProgressState {
+    done?: boolean,
+    loading?: boolean,
+    // Waiting for backend to get access package manager's lock
+    locked?: boolean,
+}
+
+export type ProgressCB = (cb: ProgressState) => void;
+
 export interface Backend {
-    getInstalled(): Promise<Package[]>;
-    searchPackages(pkgName: string): Promise<Package[]>;
+    getInstalled(cb: ProgressCB): Promise<Package[]>;
+    searchPackages(pkgName: string, cb: ProgressCB): Promise<Package[]>;
     getMissingDependencies(pkgName: string): Promise<string[]>;
     installPackages(pkgs: string[]): Promise<void>;
     unInstallPackages(pkgs: string[]): Promise<void>;
