@@ -75,7 +75,7 @@ export class PackageKit implements Backend {
         return new Promise((resolve, reject) => {
             const installed: Package[] = [];
             tryWaitZyppLock(state, () =>
-                PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], {
+                PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], null, {
                     Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
                         const fields = packageId.split(";");
                         installed.push({
