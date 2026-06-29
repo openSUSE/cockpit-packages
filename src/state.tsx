@@ -22,10 +22,10 @@ export const InstalledStore: React.FC<{ children: React.ReactNode }> = props => 
     const [loading, setLoading] = React.useState(true);
     const [backendState, setBackendState] = React.useState({});
 
-    const refreshInstalled = () => {
+    const refreshInstalled = async () => {
         setLoading(true);
         const foundPackages: Record<string, Package> = {};
-        getBackend().getInstalled((state) => setBackendState(state))
+        (await getBackend()).getInstalled((state) => setBackendState(state))
                         .then((packages) => {
                             for (const pkg of packages) {
                                 foundPackages[pkg.id] = pkg;

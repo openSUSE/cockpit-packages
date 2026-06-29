@@ -36,11 +36,11 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: Package, onUnInstalled: () 
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
 
-    const uninstallPkg = () => {
+    const uninstallPkg = async () => {
         setLoading(true);
 
-        getBackend().unInstallPackages(
-            [pkg.id]
+        (await getBackend()).unInstallPackage(
+            pkg
         ).then(() => {
             onUnInstalled();
             Dialogs.close();
