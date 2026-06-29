@@ -26,7 +26,7 @@ import { ListingTable } from 'cockpit-components-table.jsx';
 import cockpit from 'cockpit';
 import { useInstalled } from './state';
 import { EmptyStatePanel } from 'cockpit-components-empty-state';
-import { getBackend, Package } from './backend/backend';
+import { getBackend, MissingPackages, Package } from './backend/backend';
 import { useDialogs } from 'dialogs';
 
 const _ = cockpit.gettext;
@@ -36,18 +36,19 @@ type ReInstallPkg = Package & { isInstalled: boolean };
 const InstallDialog = ({ pkg }: { pkg: Package }) => {
     // TODO: loading and error indicatiors
     const Dialogs = useDialogs();
-    const [additional, setAddional] = React.useState<string[] | null>(null);
+    const [additional, setAddional] = React.useState<MissingPackages | null>(null);
 
     useEffect(() => {
-        getBackend().getMissingDependencies(pkg.name).then((pkgs) => {
-            setAddional(pkgs);
-        });
+        (async () => {
+            (await getBackend()).getMissingDependencies(pkg).then((pkgs) => {
+                setAddional(pkgs);
+            });
+        })();
     }, []);
 
     const installPkg = useCallback(async () => {
-        console.log("installing", pkg);
         if (additional) {
-            await getBackend().installPackages(additional);
+            await (await getBackend()).installPackages(additional);
         }
         Dialogs.close();
     }, [additional]);
@@ -69,13 +70,14 @@ const InstallDialog = ({ pkg }: { pkg: Package }) => {
             <ModalBody>
                 <div>
                     {_("Additional packages:")}
-                    <ul>{additional.map(id => <li key={id}>{id}</li>)}</ul>
+                    <ul>{additional.extras.map(id => <li key={id}>{id}</li>)}</ul>
                 </div>
             </ModalBody>}
             <ModalFooter>
                 <Button
                     variant="primary"
                     onClick={() => installPkg()}
+                    isDisabled={!additional}
                 >
                     {_("Install")}
                 </Button>
@@ -96,20 +98,11 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
     const [packages, setPackages] = React.useState<Record<string, ReInstallPkg>>({});
     const [pacakgesLoading, setPackagesLoadng] = React.useState(false);
 
-    useEffect(() => {
-        if (pacakgesLoading)
-            return;
-
-        const search = searchVal.trim();
-        if (search.length === 0) {
-            setPackages({});
-            return;
-        }
-
+    const searchPackages = async (search: string) => {
         const foundPackages: Record<string, ReInstallPkg> = {};
 
         setPackagesLoadng(true);
-        getBackend().searchPackages(
+        (await getBackend()).searchPackages(
             search,
             // TODO:
             () => { },
@@ -122,6 +115,19 @@ export const Install = ({ searchVal }: { searchVal: string }) => {
         }).catch(ex => {
             console.log(ex);
         }).finally(() => setPackagesLoadng(false));
+    };
+
+    useEffect(() => {
+        if (pacakgesLoading)
+            return;
+
+        const search = searchVal.trim();
+        if (search.length === 0) {
+            setPackages({});
+            return;
+        }
+
+        searchPackages(searchVal);
     }, [searchVal, setPackages]);
 
     if (pacakgesLoading) {

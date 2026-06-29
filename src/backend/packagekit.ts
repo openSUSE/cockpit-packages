@@ -1,5 +1,5 @@
 import * as PK from "packagekit.js";
-import { Backend, Package, ProgressCB, ProgressState } from "./backend";
+import { Backend, MissingPackages, Package, ProgressCB, ProgressState } from "./backend";
 // import { getPackageManager } from "packagemanager";
 import { PackageKitManager } from "_internal/packagekit";
 import { TransactionError } from "packagekit";
@@ -122,19 +122,22 @@ export class PackageKit implements Backend {
         });
     }
 
-    async getMissingDependencies(pkgName: string): Promise<string[]> {
+    async getMissingDependencies(pkg: Package): Promise<MissingPackages> {
         const pkManager = new PackageKitManager();
-        const missing = await pkManager.check_missing_packages([pkgName]);
-        // TODO: proper type for this
-        // return missing.missing_names;
-        return missing.missing_ids;
+        const missing = await pkManager.check_missing_packages([pkg.name]);
+
+        return {
+            pkg,
+            ids: missing.missing_ids,
+            extras: missing.extra_names,
+        };
     }
 
-    async installPackages(pkgs: string[]): Promise<void> {
-        await PK.cancellableTransaction("InstallPackages", [0, pkgs]);
+    async installPackages(pkgs: MissingPackages): Promise<void> {
+        await PK.cancellableTransaction("InstallPackages", [0, pkgs.ids]);
     }
 
-    async unInstallPackages(pkgs: string[]): Promise<void> {
-        await PK.cancellableTransaction("RemovePackages", [0, pkgs, true, false]);
+    async unInstallPackage(pkg: Package): Promise<void> {
+        await PK.cancellableTransaction("RemovePackages", [0, [pkg.id], true, false]);
     }
 }

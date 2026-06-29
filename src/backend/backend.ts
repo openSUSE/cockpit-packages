@@ -1,4 +1,6 @@
 import { PackageKit } from "./packagekit";
+import cockpit from "cockpit";
+import { Tukit } from "./tukit";
 
 export type Package = {
     id: string,
@@ -7,6 +9,13 @@ export type Package = {
     summary: string,
     // details: string,
     // arch: string,
+}
+
+export type MissingPackages = {
+    // Original package that's used to search for deps
+    pkg: Package,
+    ids: string[],
+    extras: string[],
 }
 
 export interface ProgressState {
@@ -21,16 +30,47 @@ export type ProgressCB = (cb: ProgressState) => void;
 export interface Backend {
     getInstalled(cb: ProgressCB): Promise<Package[]>;
     searchPackages(pkgName: string, cb: ProgressCB): Promise<Package[]>;
-    getMissingDependencies(pkgName: string): Promise<string[]>;
-    installPackages(pkgs: string[]): Promise<void>;
-    unInstallPackages(pkgs: string[]): Promise<void>;
+    getMissingDependencies(pkg: Package): Promise<MissingPackages>;
+    installPackages(pkgs: MissingPackages): Promise<void>;
+    unInstallPackage(pkg: Package): Promise<void>;
 }
 
+const isTransactional = async () => {
+    try {
+        const fstype = await cockpit.spawn(["findmnt", "-no", "FSTYPE", "/"]);
+        if (fstype.trim() === "btrfs") {
+            const mount_options = await cockpit.spawn([
+                "findmnt",
+                "-no",
+                "OPTIONS",
+                "/",
+            ]);
+            if (mount_options.split(",").includes("ro")) {
+                try {
+                    await cockpit.spawn(["test", "-f", "/usr/sbin/transactional-update"]);
+                    return true;
+                } catch (error) {
+                    console.log(error);
+                    return false;
+                }
+            }
+        }
+        return false;
+    } catch (error) {
+        console.error(error);
+        return false;
+    }
+};
+
 let backend: Backend | null = null;
-export const getBackend = (): Backend => {
+export const getBackend = async (): Promise<Backend> => {
     // TODO: actually check what backend should be used
     if (!backend) {
-        backend = new PackageKit();
+        if (await isTransactional()) {
+            backend = new Tukit();
+        } else {
+            backend = new PackageKit();
+        }
     }
 
     return backend;
