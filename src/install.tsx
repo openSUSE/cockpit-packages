@@ -63,6 +63,7 @@ const InstallDialogExtras = ({
 const InstallDialog = ({ pkg }: { pkg: Package }) => {
     // TODO: loading and error indicatiors
     const Dialogs = useDialogs();
+    const { setSuccessMessage } = useInstalled();
     const [additional, setAddional] = React.useState<MissingPackages | null>(null);
     const [loading, setLoading] = React.useState(true);
     const [installing, setInstalling] = React.useState(false);
@@ -89,6 +90,7 @@ const InstallDialog = ({ pkg }: { pkg: Package }) => {
             (await getBackend()).installPackages(
                 additional
             ).then(() => {
+                setSuccessMessage(cockpit.format(_("Successfully installed $0"), pkg.name));
                 Dialogs.close();
             }).catch(ex => {
                 if (ex.message) {

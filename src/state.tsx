@@ -8,19 +8,28 @@ export interface InstalledState {
     backendState: ProgressState,
     /* TODO: error */
     refreshInstalled: () => void,
+    successMessage: string | null,
+    setSuccessMessage: (message: string | null) => void,
 }
 
-export const InstalledContext = React.createContext({
+export const InstalledContext = React.createContext<InstalledState>({
     installed: {},
     loading: true,
     backendState: {},
     refreshInstalled: () => { },
+    successMessage: null,
+    setSuccessMessage: () => { },
 });
 
 export const InstalledStore: React.FC<{ children: React.ReactNode }> = props => {
     const [installed, setInstalled] = React.useState<Record<string, Package>>({});
     const [loading, setLoading] = React.useState(true);
     const [backendState, setBackendState] = React.useState({});
+    const [success, setSuccess] = React.useState<string | null>(null);
+
+    const setSuccessMessage = (message: string | null) => {
+        setSuccess(message);
+    };
 
     const refreshInstalled = async () => {
         setLoading(true);
@@ -40,7 +49,19 @@ export const InstalledStore: React.FC<{ children: React.ReactNode }> = props => 
         refreshInstalled();
     }, []);
 
-    return <InstalledContext.Provider value={{ installed, refreshInstalled, loading, backendState }} {...props} />;
+    return (
+        <InstalledContext.Provider
+            value={{
+                installed,
+                refreshInstalled,
+                loading,
+                backendState,
+                successMessage: success,
+                setSuccessMessage,
+            }}
+            {...props}
+        />
+    );
 };
 
 export const useInstalled = () => React.useContext(InstalledContext) as InstalledState;

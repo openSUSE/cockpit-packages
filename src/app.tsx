@@ -9,6 +9,7 @@ import cockpit from 'cockpit';
 import { superuser } from 'superuser';
 import { InstalledStore, useInstalled } from './state';
 import { EmptyStatePanel } from 'cockpit-components-empty-state';
+import { InlineNotification } from 'cockpit-components-inline-notification';
 import { ExclamationCircleIcon } from '@patternfly/react-icons';
 
 const _ = cockpit.gettext;
@@ -51,6 +52,23 @@ const AuthenticationError = () => {
     );
 };
 
+const SuccessNotification = () => {
+    const { successMessage, setSuccessMessage } = useInstalled();
+
+    if (!successMessage) {
+        return null;
+    }
+
+    return (
+        <InlineNotification
+            type="success"
+            isInline={false}
+            text={successMessage}
+            onDismiss={() => setSuccessMessage(null)}
+        />
+    );
+};
+
 // Hack to hide the Sidebar area in patternfly 6 Page
 const emptySidebar = <PageSidebar isSidebarOpen={false} />;
 
@@ -76,6 +94,7 @@ const ApplicationInner: React.FunctionComponent = () => {
     return (
         <WithDialogs>
             <Page sidebar={emptySidebar}>
+                <SuccessNotification />
                 <PageSection variant={PageSectionVariants.default} type="default" className="pkg-management-header">
                     <Flex>
                         <SearchBox onChange={setSearchVal} />

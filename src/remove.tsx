@@ -34,6 +34,7 @@ const _ = cockpit.gettext;
 
 const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: Package, onUnInstalled: () => void }) => {
     const Dialogs = useDialogs();
+    const { setSuccessMessage } = useInstalled();
     const [loading, setLoading] = React.useState(false);
     const [error, setError] = React.useState<string | null>(null);
 
@@ -43,6 +44,7 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: Package, onUnInstalled: () 
         (await getBackend()).unInstallPackage(
             pkg
         ).then(() => {
+            setSuccessMessage(cockpit.format(_("Successfully uninstalled $0"), pkg.name));
             onUnInstalled();
             Dialogs.close();
         }).catch(ex => {
