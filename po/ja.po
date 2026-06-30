@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-13 10:26+0000\n"
+"POT-Creation-Date: 2026-06-30 13:11+0300\n"
 "PO-Revision-Date: 2026-01-14 04:04+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/cockpit/cockpit-"
@@ -32,15 +32,21 @@ msgid "A cockpit module for (un)installing packages."
 msgstr ""
 "パッケージをインストール(アンインストール)するためのCockpitモジュール。"
 
-#: src/app.tsx:46
+#: src/install.tsx:55
+#, fuzzy
+#| msgid "Found packages"
+msgid "Additional packages:"
+msgstr "見つかったパッケージ"
+
+#: src/app.tsx:47
 msgid "Administrative access is required."
 msgstr "管理者でアクセスする必要があります。"
 
-#: src/app.tsx:42
+#: src/app.tsx:43
 msgid "Authentication error"
 msgstr "認証エラー"
 
-#: src/remove.tsx:100
+#: src/package_dialog.tsx:66
 msgid "Cancel"
 msgstr "キャンセル"
 
@@ -48,31 +54,43 @@ msgstr "キャンセル"
 msgid "Cockpit Packages"
 msgstr "Cockpitパッケージ"
 
-#: src/remove.tsx:69
+#: src/install.tsx:110
+#, fuzzy
+#| msgid "Confirm uninstallation"
+msgid "Confirm installation"
+msgstr "アンインストールの確認"
+
+#: src/remove.tsx:65
 msgid "Confirm uninstallation"
 msgstr "アンインストールの確認"
 
-#: src/install.tsx:87 src/remove.tsx:145
+#: src/install.tsx:169 src/remove.tsx:110
 msgid "Details"
 msgstr "詳細"
 
-#: src/install.tsx:82
+#: src/install.tsx:164
 msgid "Found packages"
 msgstr "見つかったパッケージ"
 
-#: src/app.tsx:87 src/install.tsx:102
+#: src/app.tsx:112 src/install.tsx:184
 msgid "Install"
 msgstr "インストール"
 
-#: src/remove.tsx:140
+#: src/remove.tsx:105
 msgid "Installed packages"
 msgstr "インストールされたパッケージ"
 
-#: src/install.tsx:85 src/remove.tsx:143
+#: src/install.tsx:111
+#, fuzzy
+#| msgid "Uninstalling the following package:"
+msgid "Installing the following package:"
+msgstr "以下のパッケージをアンインストールしています:"
+
+#: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
 msgstr "名前"
 
-#: src/remove.tsx:93
+#: src/package_dialog.tsx:59
 msgid "OK"
 msgstr "OK"
 
@@ -80,19 +98,27 @@ msgstr "OK"
 msgid "Packages"
 msgstr "パッケージ"
 
-#: src/install.tsx:102
+#: src/install.tsx:184
 msgid "Reinstall"
 msgstr "再インストール"
 
-#: src/app.tsx:81 src/remove.tsx:163
+#: src/install.tsx:93
+msgid "Successfully installed $0"
+msgstr ""
+
+#: src/remove.tsx:47
+msgid "Successfully uninstalled $0"
+msgstr ""
+
+#: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
 msgstr "アンインストール"
 
-#: src/remove.tsx:80
+#: src/remove.tsx:66
 msgid "Uninstalling the following package:"
 msgstr "以下のパッケージをアンインストールしています:"
 
-#: src/install.tsx:86 src/remove.tsx:144
+#: src/install.tsx:168 src/remove.tsx:109
 msgid "Version"
 msgstr "バージョン"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-13 10:26+0000\n"
+"POT-Creation-Date: 2026-06-30 13:11+0300\n"
 "PO-Revision-Date: 2026-02-03 05:04+0000\n"
 "Last-Translator: Arif Budiman <arifpedia@gmail.com>\n"
 "Language-Team: Indonesian <https://l10n.opensuse.org/projects/cockpit/"
@@ -31,15 +31,21 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr "Modul cockpit untuk menginstal atau menghapus paket."
 
-#: src/app.tsx:46
+#: src/install.tsx:55
+#, fuzzy
+#| msgid "Found packages"
+msgid "Additional packages:"
+msgstr "Paket yang ditemukan"
+
+#: src/app.tsx:47
 msgid "Administrative access is required."
 msgstr "Akses administratif diperlukan."
 
-#: src/app.tsx:42
+#: src/app.tsx:43
 msgid "Authentication error"
 msgstr "Kesalahan autentikasi"
 
-#: src/remove.tsx:100
+#: src/package_dialog.tsx:66
 msgid "Cancel"
 msgstr "Batalkan"
 
@@ -47,31 +53,43 @@ msgstr "Batalkan"
 msgid "Cockpit Packages"
 msgstr "Paket Cockpit"
 
-#: src/remove.tsx:69
+#: src/install.tsx:110
+#, fuzzy
+#| msgid "Confirm uninstallation"
+msgid "Confirm installation"
+msgstr "Konfirmasi penghapusan instalasi"
+
+#: src/remove.tsx:65
 msgid "Confirm uninstallation"
 msgstr "Konfirmasi penghapusan instalasi"
 
-#: src/install.tsx:87 src/remove.tsx:145
+#: src/install.tsx:169 src/remove.tsx:110
 msgid "Details"
 msgstr "Rincian"
 
-#: src/install.tsx:82
+#: src/install.tsx:164
 msgid "Found packages"
 msgstr "Paket yang ditemukan"
 
-#: src/app.tsx:87 src/install.tsx:102
+#: src/app.tsx:112 src/install.tsx:184
 msgid "Install"
 msgstr "Instal"
 
-#: src/remove.tsx:140
+#: src/remove.tsx:105
 msgid "Installed packages"
 msgstr "Paket yang diinstal"
 
-#: src/install.tsx:85 src/remove.tsx:143
+#: src/install.tsx:111
+#, fuzzy
+#| msgid "Uninstalling the following package:"
+msgid "Installing the following package:"
+msgstr "Menghapus paket berikut:"
+
+#: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
 msgstr "Nama"
 
-#: src/remove.tsx:93
+#: src/package_dialog.tsx:59
 msgid "OK"
 msgstr "Oke"
 
@@ -79,19 +97,27 @@ msgstr "Oke"
 msgid "Packages"
 msgstr "Paket"
 
-#: src/install.tsx:102
+#: src/install.tsx:184
 msgid "Reinstall"
 msgstr "Instal ulang"
 
-#: src/app.tsx:81 src/remove.tsx:163
+#: src/install.tsx:93
+msgid "Successfully installed $0"
+msgstr ""
+
+#: src/remove.tsx:47
+msgid "Successfully uninstalled $0"
+msgstr ""
+
+#: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
 msgstr "Copot"
 
-#: src/remove.tsx:80
+#: src/remove.tsx:66
 msgid "Uninstalling the following package:"
 msgstr "Menghapus paket berikut:"
 
-#: src/install.tsx:86 src/remove.tsx:144
+#: src/install.tsx:168 src/remove.tsx:109
 msgid "Version"
 msgstr "Versi"
 

@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-13 10:26+0000\n"
+"POT-Creation-Date: 2026-06-30 13:11+0300\n"
 "PO-Revision-Date: 2026-01-16 21:04+0000\n"
 "Last-Translator: Ettore Atalan <atalanttore@googlemail.com>\n"
 "Language-Team: German <https://l10n.opensuse.org/projects/cockpit/cockpit-"
@@ -31,15 +31,21 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr "Ein Cockpit Modul zum (de-)installieren von Paketen."
 
-#: src/app.tsx:46
+#: src/install.tsx:55
+#, fuzzy
+#| msgid "Found packages"
+msgid "Additional packages:"
+msgstr "Gefundene Pakete"
+
+#: src/app.tsx:47
 msgid "Administrative access is required."
 msgstr "Administratorzugriff ist erforderlich."
 
-#: src/app.tsx:42
+#: src/app.tsx:43
 msgid "Authentication error"
 msgstr "Authentifizierungsfehler"
 
-#: src/remove.tsx:100
+#: src/package_dialog.tsx:66
 msgid "Cancel"
 msgstr "Abbrechen"
 
@@ -47,31 +53,43 @@ msgstr "Abbrechen"
 msgid "Cockpit Packages"
 msgstr "Cockpit Pakete"
 
-#: src/remove.tsx:69
+#: src/install.tsx:110
+#, fuzzy
+#| msgid "Confirm uninstallation"
+msgid "Confirm installation"
+msgstr "Deinstallation bestätigen"
+
+#: src/remove.tsx:65
 msgid "Confirm uninstallation"
 msgstr "Deinstallation bestätigen"
 
-#: src/install.tsx:87 src/remove.tsx:145
+#: src/install.tsx:169 src/remove.tsx:110
 msgid "Details"
 msgstr "Details"
 
-#: src/install.tsx:82
+#: src/install.tsx:164
 msgid "Found packages"
 msgstr "Gefundene Pakete"
 
-#: src/app.tsx:87 src/install.tsx:102
+#: src/app.tsx:112 src/install.tsx:184
 msgid "Install"
 msgstr "Installieren"
 
-#: src/remove.tsx:140
+#: src/remove.tsx:105
 msgid "Installed packages"
 msgstr "Installierte Pakete"
 
-#: src/install.tsx:85 src/remove.tsx:143
+#: src/install.tsx:111
+#, fuzzy
+#| msgid "Uninstalling the following package:"
+msgid "Installing the following package:"
+msgstr "Deinstallieren der folgenden Pakete:"
+
+#: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
 msgstr "Name"
 
-#: src/remove.tsx:93
+#: src/package_dialog.tsx:59
 msgid "OK"
 msgstr "OK"
 
@@ -79,19 +97,27 @@ msgstr "OK"
 msgid "Packages"
 msgstr "Pakete"
 
-#: src/install.tsx:102
+#: src/install.tsx:184
 msgid "Reinstall"
 msgstr "Neu Installieren"
 
-#: src/app.tsx:81 src/remove.tsx:163
+#: src/install.tsx:93
+msgid "Successfully installed $0"
+msgstr ""
+
+#: src/remove.tsx:47
+msgid "Successfully uninstalled $0"
+msgstr ""
+
+#: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
 msgstr "Deinstallieren"
 
-#: src/remove.tsx:80
+#: src/remove.tsx:66
 msgid "Uninstalling the following package:"
 msgstr "Deinstallieren der folgenden Pakete:"
 
-#: src/install.tsx:86 src/remove.tsx:144
+#: src/install.tsx:168 src/remove.tsx:109
 msgid "Version"
 msgstr "Version"
 
