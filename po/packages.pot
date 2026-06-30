@@ -22,7 +22,7 @@ msgstr ""
 "#-#-#-#-#  packages.js.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2026-01-13 10:26+0000\n"
+"POT-Creation-Date: 2026-06-30 13:11+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -39,7 +39,7 @@ msgstr ""
 "#-#-#-#-#  packages.metainfo.pot (PACKAGE VERSION)  #-#-#-#-#\n"
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
-"POT-Creation-Date: 2025-04-17 07:48+0100\n"
+"POT-Creation-Date: 2026-06-23 09:57+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -53,15 +53,19 @@ msgstr ""
 msgid "A cockpit module for (un)installing packages."
 msgstr ""
 
-#: src/app.tsx:46
+#: src/install.tsx:55
+msgid "Additional packages:"
+msgstr ""
+
+#: src/app.tsx:47
 msgid "Administrative access is required."
 msgstr ""
 
-#: src/app.tsx:42
+#: src/app.tsx:43
 msgid "Authentication error"
 msgstr ""
 
-#: src/remove.tsx:100
+#: src/package_dialog.tsx:66
 msgid "Cancel"
 msgstr ""
 
@@ -69,31 +73,39 @@ msgstr ""
 msgid "Cockpit Packages"
 msgstr ""
 
-#: src/remove.tsx:69
+#: src/install.tsx:110
+msgid "Confirm installation"
+msgstr ""
+
+#: src/remove.tsx:65
 msgid "Confirm uninstallation"
 msgstr ""
 
-#: src/install.tsx:87 src/remove.tsx:145
+#: src/install.tsx:169 src/remove.tsx:110
 msgid "Details"
 msgstr ""
 
-#: src/install.tsx:82
+#: src/install.tsx:164
 msgid "Found packages"
 msgstr ""
 
-#: src/app.tsx:87 src/install.tsx:102
+#: src/app.tsx:112 src/install.tsx:184
 msgid "Install"
 msgstr ""
 
-#: src/remove.tsx:140
+#: src/remove.tsx:105
 msgid "Installed packages"
 msgstr ""
 
-#: src/install.tsx:85 src/remove.tsx:143
+#: src/install.tsx:111
+msgid "Installing the following package:"
+msgstr ""
+
+#: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
 msgstr ""
 
-#: src/remove.tsx:93
+#: src/package_dialog.tsx:59
 msgid "OK"
 msgstr ""
 
@@ -101,18 +113,26 @@ msgstr ""
 msgid "Packages"
 msgstr ""
 
-#: src/install.tsx:102
+#: src/install.tsx:184
 msgid "Reinstall"
 msgstr ""
 
-#: src/app.tsx:81 src/remove.tsx:163
+#: src/install.tsx:93
+msgid "Successfully installed $0"
+msgstr ""
+
+#: src/remove.tsx:47
+msgid "Successfully uninstalled $0"
+msgstr ""
+
+#: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
 msgstr ""
 
-#: src/remove.tsx:80
+#: src/remove.tsx:66
 msgid "Uninstalling the following package:"
 msgstr ""
 
-#: src/install.tsx:86 src/remove.tsx:144
+#: src/install.tsx:168 src/remove.tsx:109
 msgid "Version"
 msgstr ""
