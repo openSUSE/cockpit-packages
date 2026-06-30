@@ -19,7 +19,7 @@
 
 import React, { useCallback, useEffect } from 'react';
 import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
-import { Button, Modal, ModalBody, ModalFooter, ModalHeader } from '@patternfly/react-core';
+import { Button, ModalBody } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
 
@@ -28,67 +28,89 @@ import { useInstalled } from './state';
 import { EmptyStatePanel } from 'cockpit-components-empty-state';
 import { getBackend, MissingPackages, Package } from './backend/backend';
 import { useDialogs } from 'dialogs';
+import PackageDialog from './package_dialog';
 
 const _ = cockpit.gettext;
 
 type ReInstallPkg = Package & { isInstalled: boolean };
 
+const InstallDialogExtras = ({
+    loading,
+    additional,
+}: {
+    loading: boolean,
+    additional: MissingPackages | null,
+}) => {
+    if (loading || !additional) {
+        return <EmptyStatePanel loading />;
+    }
+
+    if (additional.extras.length === 0) {
+        return null;
+    }
+
+    return (
+        <ModalBody>
+            <div>
+                <p>{_("Additional packages:")}</p>
+                <br />
+                <ul>{additional.extras.map(id => <li key={id}>{id}</li>)}</ul>
+            </div>
+        </ModalBody>
+    );
+};
+
 const InstallDialog = ({ pkg }: { pkg: Package }) => {
     // TODO: loading and error indicatiors
     const Dialogs = useDialogs();
     const [additional, setAddional] = React.useState<MissingPackages | null>(null);
+    const [loading, setLoading] = React.useState(true);
+    const [installing, setInstalling] = React.useState(false);
+    const [error, setError] = React.useState<string | null>(null);
 
     useEffect(() => {
         (async () => {
+            setLoading(true);
             (await getBackend()).getMissingDependencies(pkg).then((pkgs) => {
                 setAddional(pkgs);
-            });
+            }).catch(ex => {
+                if (ex.message) {
+                    setError(ex.message);
+                }
+
+                console.error(ex);
+            }).finally(() => setLoading(false));
         })();
     }, []);
 
     const installPkg = useCallback(async () => {
-        if (additional) {
-            await (await getBackend()).installPackages(additional);
+        if (!loading && additional) {
+            setInstalling(true);
+            (await getBackend()).installPackages(
+                additional
+            ).then(() => {
+                Dialogs.close();
+            }).catch(ex => {
+                if (ex.message) {
+                    setError(ex.message);
+                }
+
+                console.error(ex);
+            }).finally(() => setInstalling(false));
         }
-        Dialogs.close();
     }, [additional]);
 
     return (
-        <Modal
-            title={_("Confirm uninstallation")}
-            isOpen
-            onClose={() => Dialogs.close()}
-            className='pf-v6-c-modal-box pf-m-align-top pf-m-md'
+        <PackageDialog
+            pkg={pkg}
+            onOk={() => installPkg()}
+            error={error}
+            title={_("Confirm installation")}
+            header={_("Installing the following package:")}
+            loading={loading || installing}
         >
-            <ModalHeader>
-                <>
-                    <p>{_("Installing the following package:")}</p>
-                    <p>{pkg.name}</p>
-                </>
-            </ModalHeader>
-            {additional &&
-            <ModalBody>
-                <div>
-                    {_("Additional packages:")}
-                    <ul>{additional.extras.map(id => <li key={id}>{id}</li>)}</ul>
-                </div>
-            </ModalBody>}
-            <ModalFooter>
-                <Button
-                    variant="primary"
-                    onClick={() => installPkg()}
-                    isDisabled={!additional}
-                >
-                    {_("Install")}
-                </Button>
-                <Button
-                    variant="secondary"
-                    onClick={() => Dialogs.close()}
-                >
-                    {_("Cancel")}
-                </Button>
-            </ModalFooter>
-        </Modal>
+            <InstallDialogExtras loading={loading} additional={additional} />
+        </PackageDialog>
     );
 };
 

@@ -19,7 +19,7 @@
 
 import React, { useEffect } from 'react';
 import { PageSection, PageSectionVariants } from "@patternfly/react-core/dist/esm/components/Page/index.js";
-import { Alert, Button, Modal, ModalFooter, ModalHeader } from '@patternfly/react-core';
+import { Button } from '@patternfly/react-core';
 
 import { ListingTable } from 'cockpit-components-table.jsx';
 import { EmptyStatePanel } from "cockpit-components-empty-state";
@@ -28,6 +28,7 @@ import cockpit from 'cockpit';
 import { useDialogs } from "dialogs.jsx";
 import { useInstalled } from './state';
 import { getBackend, Package } from './backend/backend';
+import PackageDialog from './package_dialog';
 
 const _ = cockpit.gettext;
 
@@ -55,42 +56,14 @@ const RemoveDialog = ({ pkg, onUnInstalled }: { pkg: Package, onUnInstalled: () 
     };
 
     return (
-        <Modal
+        <PackageDialog
+            pkg={pkg}
+            onOk={() => uninstallPkg()}
+            error={error}
             title={_("Confirm uninstallation")}
-            isOpen
-            onClose={() => Dialogs.close()}
-            className='pf-v6-c-modal-box pf-m-align-top pf-m-md'
-        >
-            <ModalHeader>
-                {
-                    error
-                        ? <Alert variant="danger" isInline title={error} />
-                        : (
-                            <>
-                                <p>{_("Uninstalling the following package:")}</p>
-                                <p>{pkg.name}</p>
-                            </>
-                        )
-                }
-            </ModalHeader>
-            <ModalFooter>
-                <Button
-                    variant="primary"
-                    onClick={() => uninstallPkg()}
-                    isLoading={loading}
-                    isDisabled={!!error}
-                >
-                    {_("OK")}
-                </Button>
-                <Button
-                    variant="secondary"
-                    onClick={() => Dialogs.close()}
-                    isDisabled={loading}
-                >
-                    {_("Cancel")}
-                </Button>
-            </ModalFooter>
-        </Modal>
+            header={_("Uninstalling the following package:")}
+            loading={loading}
+        />
     );
 };
 
