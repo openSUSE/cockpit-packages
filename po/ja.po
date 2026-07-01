@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-30 13:11+0300\n"
-"PO-Revision-Date: 2026-01-14 04:04+0000\n"
+"PO-Revision-Date: 2026-07-01 04:12+0000\n"
 "Last-Translator: Yasuhiko Kamata <belphegor@belbel.or.jp>\n"
 "Language-Team: Japanese <https://l10n.opensuse.org/projects/cockpit/cockpit-"
 "packages/ja/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
@@ -33,10 +33,8 @@ msgstr ""
 "パッケージをインストール(アンインストール)するためのCockpitモジュール。"
 
 #: src/install.tsx:55
-#, fuzzy
-#| msgid "Found packages"
 msgid "Additional packages:"
-msgstr "見つかったパッケージ"
+msgstr "追加のパッケージ:"
 
 #: src/app.tsx:47
 msgid "Administrative access is required."
@@ -55,10 +53,8 @@ msgid "Cockpit Packages"
 msgstr "Cockpitパッケージ"
 
 #: src/install.tsx:110
-#, fuzzy
-#| msgid "Confirm uninstallation"
 msgid "Confirm installation"
-msgstr "アンインストールの確認"
+msgstr "インストールの確認"
 
 #: src/remove.tsx:65
 msgid "Confirm uninstallation"
@@ -81,10 +77,8 @@ msgid "Installed packages"
 msgstr "インストールされたパッケージ"
 
 #: src/install.tsx:111
-#, fuzzy
-#| msgid "Uninstalling the following package:"
 msgid "Installing the following package:"
-msgstr "以下のパッケージをアンインストールしています:"
+msgstr "以下のパッケージをインストールしています:"
 
 #: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
@@ -104,11 +98,11 @@ msgstr "再インストール"
 
 #: src/install.tsx:93
 msgid "Successfully installed $0"
-msgstr ""
+msgstr "$0 のインストールが完了しました"
 
 #: src/remove.tsx:47
 msgid "Successfully uninstalled $0"
-msgstr ""
+msgstr "$0 のアンインストールが完了しました"
 
 #: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
