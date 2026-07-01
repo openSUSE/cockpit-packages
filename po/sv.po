@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-30 13:11+0300\n"
-"PO-Revision-Date: 2026-01-14 07:04+0000\n"
+"PO-Revision-Date: 2026-07-01 09:12+0000\n"
 "Last-Translator: Luna  Jernberg <bittin@opensuse.org>\n"
 "Language-Team: Swedish <https://l10n.opensuse.org/projects/cockpit/cockpit-"
 "packages/sv/>\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Weblate 5.15.1\n"
+"X-Generator: Weblate 2026.6.1\n"
 
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
@@ -32,10 +32,8 @@ msgid "A cockpit module for (un)installing packages."
 msgstr "En cockpit modul för (av)installera paket."
 
 #: src/install.tsx:55
-#, fuzzy
-#| msgid "Found packages"
 msgid "Additional packages:"
-msgstr "Hittade paket"
+msgstr "Ytterligare paket:"
 
 #: src/app.tsx:47
 msgid "Administrative access is required."
@@ -54,10 +52,8 @@ msgid "Cockpit Packages"
 msgstr "Cockpit paket"
 
 #: src/install.tsx:110
-#, fuzzy
-#| msgid "Confirm uninstallation"
 msgid "Confirm installation"
-msgstr "Bekräfta avinstallation"
+msgstr "Bekräfta installation"
 
 #: src/remove.tsx:65
 msgid "Confirm uninstallation"
@@ -80,10 +76,8 @@ msgid "Installed packages"
 msgstr "Installerade paket"
 
 #: src/install.tsx:111
-#, fuzzy
-#| msgid "Uninstalling the following package:"
 msgid "Installing the following package:"
-msgstr "Avinstallerar följande paket:"
+msgstr "Installerar följande paket:"
 
 #: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
@@ -103,11 +97,11 @@ msgstr "Ominstallera"
 
 #: src/install.tsx:93
 msgid "Successfully installed $0"
-msgstr ""
+msgstr "Framgångsrikt installerat $0"
 
 #: src/remove.tsx:47
 msgid "Successfully uninstalled $0"
-msgstr ""
+msgstr "Framgångsrikt avinstallerat $0"
 
 #: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
