@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-30 13:11+0300\n"
-"PO-Revision-Date: 2026-07-01 23:12+0000\n"
+"PO-Revision-Date: 2026-10-13 22:13+0000\n"
 "Last-Translator: Eugene Krater <lachend@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/cockpit/cockpit-"
 "packages/uk/>\n"
@@ -25,16 +25,16 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=n%10==1 && n%100!=11 ? 0 : n%10>=2 && "
 "n%10<=4 && (n%100<10 || n%100>=20) ? 1 : 2;\n"
-"X-Generator: Weblate 2026.6.1\n"
+"X-Generator: Weblate 2026.10.1\n"
 
 #: org.cockpit_project.packages.metainfo.xml:6
 #: org.cockpit_project.packages.metainfo.xml:8
 msgid "A cockpit module for (un)installing packages."
-msgstr ""
+msgstr "Модуль cockpit для (де)інсталяції пакетів."
 
 #: src/install.tsx:55
 msgid "Additional packages:"
-msgstr ""
+msgstr "Додаткові пакети:"
 
 #: src/app.tsx:47
 msgid "Administrative access is required."
@@ -50,63 +50,63 @@ msgstr "Скасувати"
 
 #: src/index.html:20
 msgid "Cockpit Packages"
-msgstr ""
+msgstr "Пакети Cockpit"
 
 #: src/install.tsx:110
 msgid "Confirm installation"
-msgstr ""
+msgstr "Підтвердити встановлення"
 
 #: src/remove.tsx:65
 msgid "Confirm uninstallation"
-msgstr ""
+msgstr "Підтвердити видалення"
 
 #: src/install.tsx:169 src/remove.tsx:110
 msgid "Details"
-msgstr ""
+msgstr "Докладніше"
 
 #: src/install.tsx:164
 msgid "Found packages"
-msgstr ""
+msgstr "Знайдені пакунки"
 
 #: src/app.tsx:112 src/install.tsx:184
 msgid "Install"
-msgstr ""
+msgstr "Встановити"
 
 #: src/remove.tsx:105
 msgid "Installed packages"
-msgstr ""
+msgstr "Встановлені пакунки"
 
 #: src/install.tsx:111
 msgid "Installing the following package:"
-msgstr ""
+msgstr "Встановлення таких пакунків:"
 
 #: src/install.tsx:167 src/remove.tsx:108
 msgid "Name"
-msgstr ""
+msgstr "Назва"
 
 #: src/package_dialog.tsx:59
 msgid "OK"
-msgstr ""
+msgstr "OK"
 
 #: src/manifest.json:0 org.cockpit_project.packages.metainfo.xml:5
 msgid "Packages"
-msgstr ""
+msgstr "Пакунки"
 
 #: src/install.tsx:184
 msgid "Reinstall"
-msgstr ""
+msgstr "Перевстановити"
 
 #: src/install.tsx:93
 msgid "Successfully installed $0"
-msgstr ""
+msgstr "Встановлено успішно $0"
 
 #: src/remove.tsx:47
 msgid "Successfully uninstalled $0"
-msgstr ""
+msgstr "Успішно видалено $0"
 
 #: src/app.tsx:106 src/remove.tsx:128
 msgid "Uninstall"
-msgstr ""
+msgstr "Деінсталювати"
 
 #: src/remove.tsx:66
 msgid "Uninstalling the following package:"
