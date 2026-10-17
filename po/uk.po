@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: PACKAGE VERSION\n"
 "Report-Msgid-Bugs-To: \n"
 "POT-Creation-Date: 2026-06-30 13:11+0300\n"
-"PO-Revision-Date: 2026-10-13 22:13+0000\n"
+"PO-Revision-Date: 2026-10-17 17:13+0000\n"
 "Last-Translator: Eugene Krater <lachend@gmail.com>\n"
 "Language-Team: Ukrainian <https://l10n.opensuse.org/projects/cockpit/cockpit-"
 "packages/uk/>\n"
@@ -110,8 +110,8 @@ msgstr "Деінсталювати"
 
 #: src/remove.tsx:66
 msgid "Uninstalling the following package:"
-msgstr ""
+msgstr "Видалення такого пакета:"
 
 #: src/install.tsx:168 src/remove.tsx:109
 msgid "Version"
-msgstr ""
+msgstr "Версія"
