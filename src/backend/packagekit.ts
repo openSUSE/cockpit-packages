@@ -1,8 +1,7 @@
-import * as PK from "packagekit.js";
+import * as PK from "_internal/packagekit";
 import { Backend, MissingPackages, Package, ProgressCB, ProgressState } from "./backend";
 // import { getPackageManager } from "packagemanager";
-import { PackageKitManager } from "_internal/packagekit";
-import { TransactionError } from "packagekit";
+import { PackageKitManager, TransactionError } from "_internal/packagekit";
 
 // PackageKit error sometimes caused when zypper is used by another program.
 // Often happens when cockpit-tukit calls zypper, which takes the zypper lock.
@@ -56,7 +55,7 @@ const tryWaitZyppLock = async (state: PackageKitState, cb: () => Promise<void>) 
             const ex = e as Error;
             if (ex instanceof TransactionError) {
                 // XXX: might be worth it to check if the error details contain "zypper"
-                if (count < maxCount && ex.code === PK_ERROR_ENUM_FAILED_INITIALIZATION) {
+                if (count < maxCount && Number(ex.code) === PK_ERROR_ENUM_FAILED_INITIALIZATION) {
                     state.setLocked();
                     await sleep(10 * 1000);
                 } else {
@@ -76,7 +75,7 @@ export class PackageKit implements Backend {
             const installed: Package[] = [];
             tryWaitZyppLock(state, () =>
                 PK.cancellableTransaction("GetPackages", [PK.Enum.FILTER_INSTALLED], null, {
-                    Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
+                    Package: (info: number, packageId: string, summary: string) => {
                         const fields = packageId.split(";");
                         installed.push({
                             summary,
@@ -102,7 +101,7 @@ export class PackageKit implements Backend {
             const state = new PackageKitState(cb);
             tryWaitZyppLock(state, () =>
                 PK.cancellableTransaction("SearchNames", [0, [pkgName]], null, {
-                    Package: (info: typeof PK.Enum, packageId: string, summary: string) => {
+                    Package: (info: number, packageId: string, summary: string) => {
                         const fields = packageId.split(";");
                         found.push({
                             summary,
@@ -134,10 +133,10 @@ export class PackageKit implements Backend {
     }
 
     async installPackages(pkgs: MissingPackages): Promise<void> {
-        await PK.cancellableTransaction("InstallPackages", [0, pkgs.ids]);
+        await PK.cancellableTransaction("InstallPackages", [0, pkgs.ids], null);
     }
 
     async unInstallPackage(pkg: Package): Promise<void> {
-        await PK.cancellableTransaction("RemovePackages", [0, [pkg.id], true, false]);
+        await PK.cancellableTransaction("RemovePackages", [0, [pkg.id], true, false], null);
     }
 }
