@@ -45,7 +45,7 @@ BuildRequires: gettext
 BuildRequires: libappstream-glib-devel
 %endif
 BuildRequires: local-npm-registry
-BuildRequires: cockpit-devel >= 337
+BuildRequires: cockpit-devel >= 370
 
 Requires: cockpit-bridge
 Requires: PackageKit
